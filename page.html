@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/diview.css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>diView</title>
+        <meta name="author" content="Daniel Brüggemann" />
+        <meta name="generator" content="Geany" />
+    </head>
+    <body>
+        <div id="page">
+            <p>
+                <a href="#" class="dv_open_text" onclick="return false;">Show Hello World</a>
+            </p>
+            <p>
+                <img class="dv_open_image" src="img/thumbs/test_image.jpg" alt="show test image" />
+            </p>
+        </div>
+
+        <!-- diView code start -->
+        <div class="dv_box">
+            <div class="dv_layer"></div>
+            <div class="dv_wait">
+                <img src="img/wait.gif" alt="wait"/>
+            </div>
+            <div class="dv_container">
+                <div class="dv_text">
+                    <!-- area where you must place your text -->
+                    <p>
+                        Hello World
+                    </p>
+                </div>
+                <div class="dv_image">
+                    <!-- area where you must place your image -->
+                    <img class="test" src="" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- diView code end -->
+        <script src="scripts/jquery.js" type="text/javascript"></script>
+        <script src="scripts/diview.js" type="text/javascript"></script>
+    </body>
+</html>

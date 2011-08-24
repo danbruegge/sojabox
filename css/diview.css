@@ -1,0 +1,40 @@
+/*### diview */
+.dv_open {
+    cursor: pointer;
+}
+
+.dv_box {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.dv_layer {
+    background-color: #000;
+    left: 0;
+    position: absolute;
+    top: 0;
+    opacity: 0.9;
+    z-index: 1000;
+}
+
+.dv_wait,
+.dv_container {
+    display: none;
+    position: absolute;
+    z-index: 1020;
+    cursor: pointer;
+    padding: 10px;
+    background-color: white;
+}
+
+.dv_wait {
+    display: block;
+    z-index: 1010;
+}
+
+.dv_text,
+.dv_image {
+    display: none;
+}

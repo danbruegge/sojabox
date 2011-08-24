@@ -1,0 +1,13 @@
+[0.1]
+    * show loading image if the text will be load
+    * if browser will resize, change size of image and text an so
+    * keep it simple
+    * make code nice looking
+    * think about on some tricks  to get a better handling for user, for
+      example:
+        * the user will view a text or an image, so he must only set one class
+          to the object he wants to view and set a container with the full
+          content
+          # i think, this is the simplest way at the moment.
+          # diview will set the divs to view it ina a lightbox
+          # or is it simplier to lets set the user the divs?
