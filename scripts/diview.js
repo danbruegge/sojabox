@@ -5,10 +5,20 @@
  * @version     0.1
  */
 
+html = '<div class="dv_box">\
+            <div class="dv_layer"></div>\
+            <div class="dv_wait"><img src="img/wait.gif" alt="wait"/></div>\
+            <div class="dv_container">\
+                <a href="#" class="dv_close" onclick="dv_close(); return false;">X - CLOSE</a>\
+            </div>\
+        </div>'
+extensions = new Array('.jpg', '.png', '.gif');
+
 $(window).ready(function()
 {
+    $('.diview').load().attr('onclick', 'return false;');
+
     dv_open();
-    dv_close();
 });
 
 $(window).resize(function()
@@ -19,45 +29,32 @@ $(window).resize(function()
 
 function dv_open()
 {
-    $('.dv_open_text').click(function()
+    $('.diview').click(function()
     {
-        set_box_position('.dv_wait');
-        set_layer_size();
-        $('.dv_box').css('display', 'block');
+        $(html).appendTo('body');
 
-        $('.dv_text').css('height', $(window).height() * 0.75);
-
-        set_box_position('.dv_container');
-
-        $('.dv_container').css('display', 'block');
-        $('.dv_text').css('display', 'block');
-        $('.dv_wait').css('display', 'none');
-    });
-
-    $('.dv_open_image').click(function()
-    {
-        set_box_position('.dv_wait');
-        set_layer_size();
-        $('.dv_box').css('display', 'block');
-
-        src = this.src.replace('/thumbs', '');
-        alt = this.alt;
-
-        $('.test').each(function()
+        for(key in extensions)
         {
-            $(this).attr({
-                'src': src,
-                'alt': alt
-            });
+            href = $(this).attr('href');
+            if(href.toLowerCase().indexOf(extensions[key]) >= 0)
+            {
+                $('.dv_container').append('<img class="dv_image" src="'+href+'" />');
+                break;
+            }
+        }
 
+        set_box_position('.dv_wait');
+        set_layer_size();
+        $('.dv_box').css('display', 'block');
+
+        $('.dv_image').each(function()
+        {
             $(this).load(function()
             {
-                $(this).css('height', $(window).height() * 0.75);
-
+                set_image_size()
                 set_box_position('.dv_container');
 
                 $('.dv_container').css('display', 'block');
-                $('.dv_image').css('display', 'block');
                 $('.dv_wait').css('display', 'none');
             });
         });
@@ -67,8 +64,12 @@ function dv_open()
 function set_box_position(box)
 {
     $(box).css({
-        'left': ($(window).width() / 2) - ($(box).width() / 2) + $(window).scrollLeft(),
-        'top': ($(window).height() / 2) - ($(box).height() / 2) + $(window).scrollTop()
+        'left': ($(window).width() / 2)
+            - ($(box).width() / 2)
+            + $(window).scrollLeft(),
+        'top': ($(window).height() / 2)
+            - ($(box).height() / 2)
+            + $(window).scrollTop()
     });
 }
 
@@ -80,23 +81,15 @@ function set_layer_size()
     });
 }
 
+function set_image_size()
+{
+    $('.dv_image').css('height', $(window).height() * 0.75);
+}
+
 function dv_close()
 {
-    $('.dv_container').click(function()
-    {
-        $('.dv_box').css('display', 'none');
-        $('.dv_container').css('display', 'none');
-        $('.dv_wait').css('display', 'block');
-        $('.dv_text').css('display', 'none');
-        $('.dv_image').css('display', 'none');
-    });
-
-    $('.dv_layer').click(function()
-    {
-        $('.dv_box').css('display', 'none');
-        $('.dv_container').css('display', 'none');
-        $('.dv_wait').css('display', 'block');
-        $('.dv_text').css('display', 'none');
-        $('.dv_image').css('display', 'none');
-    });
+    $('.dv_box').css('display', 'none');
+    $('.dv_container').css('display', 'none');
+    $('.dv_wait').css('display', 'block');
+    $('.dv_image').detach();
 }
