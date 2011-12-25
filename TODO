@@ -2,7 +2,6 @@
     * create at first all functions to view images and galleries
     * image-gallary, same a a single image but with the use of rel="" in the
       <a> tag. That gruoped the images.
-    * the close button should placed on top of the right side
 
 [0.2]
     * think about load content in div
@@ -10,6 +9,8 @@
     * print function
 [0.3]
     * zoom function...
+    * put a copyright or link to github or haengebruegge.de in every view on
+      the left side of the top panel.
 
 
 NOTE:

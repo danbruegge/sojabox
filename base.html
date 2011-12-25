@@ -2,20 +2,21 @@
 <html lang="de">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>soja - jquery imageviewer</title>
+        <title>sojabox - jquery imageviewer</title>
         <meta name="author" content="Daniel Brüggemann" />
     </head>
     <body>
         <div id="page">
             <p>
-                <a href="img/test_image.jpg" class="soja">
-                    <img src="img/thumbs/test_image.jpg" alt="show test image" />
-                </a>
+                <a href="img/test_image1.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
+                <a href="img/test_image2.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image2.jpg" alt="show test image 2" /></a>
+                <a href="img/test_image3.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image3.jpg" alt="show test image 3" /></a>
+                <a href="img/test_image4.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
         </div>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="soja.js"></script>
-        <script type="text/javascript">$('#page').soja();</script>
+        <script type="text/javascript" src="sojabox.js"></script>
+        <script type="text/javascript">$('#page').sojabox();</script>
     </body>
 </html>
