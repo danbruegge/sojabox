@@ -1,8 +1,3 @@
-/*
- * @author  deadshox
- * @date    19.May.2011
- */
-
 $(window).ready(function()
 {
     iv_open();

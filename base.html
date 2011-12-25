@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/base.css" />
+        <link rel="stylesheet" type="text/css" href="css/soja.css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>soja - jquery imageviewer</title>
+        <meta name="author" content="Daniel Brüggemann" />
+    </head>
+    <body>
+        <div id="page">
+            <p>
+                <a href="img/test_image.jpg" class="soja">
+                    <img src="img/thumbs/test_image.jpg" alt="show test image" />
+                </a>
+            </p>
+        </div>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="soja.js"></script>
+        <script type="text/javascript">$('#page').soja();</script>
+    </body>
+</html>

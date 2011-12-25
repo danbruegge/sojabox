@@ -5,25 +5,22 @@ html, body {
     margin: 0 auto;
     height: 100%;
     color: #333;
-    font: normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
-    background-color: #b84;
-}
-
-a,
-a:hover {
-    color: #666;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #000;
+    background-color: #eee;
 }
 
 #page {
+    overflow: auto;
     margin: 0 auto;
     width: 700px;
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    background-color: #fc8;
+    border-left: 5px solid #333;
+    border-right: 5px solid #333;
+    background-color: #666;
+    text-align: center;
+}
+
+#page p {
+    margin-top: 50px;
 }

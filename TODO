@@ -14,3 +14,17 @@
 [0.2]
     * think about load content in div
     * for content, use jquery load?
+    * print function
+
+
+NOTE:
+    * the entire browserscreen is the imageviewer.
+        * let it look like ristretto or an other normal OS imageviewer.
+        * such as: the prev and next buttons are placed on the right and left
+          side of the browser screen, no on the image. i think this is a better
+          imageviewer expirience.
+        * the close button, is also placed on top of the right side
+        * no transparent background...
+        * gallerie images placed on the bottom
+        * no special looking fadein fadeout shit...
+        *
