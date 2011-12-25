@@ -1,0 +1,4 @@
+[API]
+    * a link wrapped around the an image
+    * use class "soja"  in <a> for all images that will show in the view
+    * use rel="..." in <a> to create view groups

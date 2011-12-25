@@ -13,8 +13,16 @@
     var methods = {
         init: function(options) {
             win = $(window);
-            extensions = new Array('.jpg', '.png', '.gif');
-            html = '<div id="soja_box">\
+            extensions = new Array('.jpg','.png','.gif');
+            html = '<style>\
+                #soja_open{cursor: pointer;}\
+                #soja_box{display:none;position:absolute;top:0;left:0;}\
+                #soja_background{background-color:#000;left:0;position:absolute;top:0;z-index:1000;}\
+                #soja_wait,#soja_container{display:none;position:absolute;z-index:1020;padding:10px;background-color:white;border:5px solid grey;}\
+                #soja_wait{display:block;z-index:1010;}\
+                #soja_close{float:right;}\
+            </style>\
+            <div id="soja_box">\
                 <div id="soja_background"></div>\
                 <div id="soja_wait"><img src="img/wait.gif" alt="wait"/></div>\
                 <div id="soja_container"><a href="#">X - CLOSE</a></div>\
@@ -45,7 +53,9 @@
             for(key in extensions) {
                 href = soja_link.attr('href');
                 if(href.toLowerCase().indexOf(extensions[key]) >= 0) {
-                    soja_container.append('<img id="soja_image" src="'+href+'" />');
+                    soja_container.append(
+                        '<img id="soja_image" src="'+href+'" />'
+                    );
                     break;
                 }
             };
