@@ -1,0 +1,65 @@
+#sojabox {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000
+}
+    #soja-head {
+        overflow: auto;
+        background-color: #111;
+        border-bottom: 1px solid #333
+    }
+
+        #soja-head:hover {
+            background-color: #333;
+            border-bottom: 1px solid #666
+        }
+
+        #soja-head div {
+            overflow: auto;
+            padding: 3px 15px
+        }
+
+            #soja-head div a {
+                float: left;
+                padding: 3px;
+                color: #ccc;
+                text-decoration: none;
+                font-size: 12px
+            }
+
+            #soja-head div a:hover { color: #fff }
+
+            #soja-head div a.soja-copyright { margin-right: 10px }
+
+            #soja-head div a.soja-close { float: right }
+
+        #soja-wait,
+        #soja-image {
+            overflow: auto;
+            display: none;
+            position: absolute;
+            border: 5px solid #666
+        }
+
+        #soja-wait { display:block }
+
+            #soja-wait img, #soja-image img { display: block }
+
+        #soja-next, #soja-prev { position:absolute }
+
+    #soja-bottom {
+        padding: 0 10px 10px 0;
+        position: absolute;
+        bottom: 0;
+        right: 0
+    }
+
+        #soja-bottom a {
+            font-size: 9px;
+            color: #333;
+            text-decoration: none
+        }
+
+        #soja-bottom a:hover { color: #999 }

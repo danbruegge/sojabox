@@ -2,6 +2,7 @@
 <html lang="de">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="sojabox.css" />
         <title>sojabox - jquery imageviewer</title>
         <meta name="author" content="Daniel Brüggemann" />
     </head>
@@ -13,6 +14,24 @@
                 <a href="img/test_image3.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image3.jpg" alt="show test image 3" /></a>
                 <a href="img/test_image4.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
+        </div>
+
+        <div id="sojabox">
+            <div id="soja-head">
+                <div>
+                    <a href="" class="soja-original">ORIGINAL</a>
+                    <a href="#" class="soja-close">CLOSE</a>
+                </div>
+            </div>
+            <div id="soja-body">
+                <div id="soja-wait"><img src="img/wait.gif" alt="wait" /></div>
+                <div id="soja-image"></div>
+                <div id="soja-prev"><a href="#">&lt;P</a></div>
+                <div id="soja-next"><a href="#">N&gt;</a></div>
+            </div>
+            <div id="soja-bottom">
+                <a href="http://haengebruegge.de" class="soja-copyright">haengebruegge.de</a>
+            </div>
         </div>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

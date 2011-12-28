@@ -2,6 +2,11 @@
     * create at first all functions to view images and galleries
     * image-gallary, same a a single image but with the use of rel="" in the
       <a> tag. That gruoped the images.
+      * use the prev and next image as button for prev and next navigation
+      * put images in ul list
+    * create icons that replace the text in the imageviewer
+    * on bottom of the image, show an the text of the alt tag
+    * https://github.com/georgepaterson/jquery-imageviewer/blob/master/script/jquery.imageviewer.js
 
 [0.2]
     * think about load content in div
@@ -9,14 +14,7 @@
     * print function
 [0.3]
     * zoom function...
-    * put a copyright or link to github or haengebruegge.de in every view on
-      the left side of the top panel.
 
 
 NOTE:
-    * the entire browserscreen is the imageviewer.
-        * let it look like ristretto or an other normal OS imageviewer.
-        * such as: the prev and next buttons are placed on the right and left
-          side of the browser screen, no on the image. i think this is a better
-          imageviewer expirience.
-        * gallerie images placed on the bottom
+    * checkout computerbase and computerbase for a good imageviewer
