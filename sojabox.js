@@ -124,14 +124,24 @@
                 active -= 1;
                 prev -= 1;
                 next -= 1;
+            } else {
+                active = soja_group.length-1;
+                prev = soja_group.length-2;
+                next = soja_group.length;
+                methods.change(active);
             };
         },
         next: function(step) {
             if(next <= (soja_group.length-1)) {
-                methods.change(step);
                 active += 1;
                 prev += 1;
                 next += 1;
+                methods.change(step);
+            } else {
+                active = 0;
+                prev = -1;
+                next = 1;
+                methods.change(active);
             };
         },
         change: function(step) {
