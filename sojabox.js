@@ -61,14 +61,14 @@
                 console.log(soja_group[next]);
             };
 
+            target_image = target.children('img');
+
             for(key in extensions) {
                 href = target.attr('href');
                 if(href.toLowerCase().indexOf(extensions[key]) >= 0) {
-                    soja_head.children('a.soja-original').attr(
-                        'href',
-                        href
-                    );
+                    soja_head.find('#soja-original').attr('href',href);
                     soja_image.append('<img src="'+href+'" />');
+                    soja_image.append('<p>'+target_image.attr('alt')+'</p>');
                     break;
                 };
             };
@@ -86,7 +86,7 @@
                 });
             });
 
-            soja_head.find('div>a.soja-close').bind('click', function(e) {
+            soja_head.find('#soja-close').bind('click', function(e) {
                 e.preventDefault();
                 methods.close();
                 return false;
@@ -97,6 +97,7 @@
             soja_image.css('display', 'none');
             soja_wait.css('display', 'block');
             soja_image.children('img').detach();
+            soja_image.children('p').detach();
         },
         set_box_size: function() {
             if(soja_group) {

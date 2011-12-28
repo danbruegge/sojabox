@@ -22,7 +22,6 @@
         }
 
             #soja-head div a {
-                float: left;
                 padding: 3px;
                 color: #ccc;
                 text-decoration: none;
@@ -31,21 +30,24 @@
 
             #soja-head div a:hover { color: #fff }
 
-            #soja-head div a.soja-copyright { margin-right: 10px }
-
-            #soja-head div a.soja-close { float: right }
+            #soja-close { float: right }
 
         #soja-wait,
         #soja-image {
             overflow: auto;
             display: none;
             position: absolute;
-            border: 5px solid #666
+            color: #ccc
         }
 
         #soja-wait { display:block }
 
-            #soja-wait img, #soja-image img { display: block }
+            #soja-wait img, #soja-image img {
+                display: block;
+                border: 5px solid #333
+            }
+
+        #soja-image { text-align: center }
 
         #soja-next, #soja-prev { position:absolute }
 
