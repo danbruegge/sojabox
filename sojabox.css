@@ -49,7 +49,14 @@
 
         #soja-image { text-align: center }
 
-        #soja-next, #soja-prev { position:absolute }
+        #soja-next, #soja-prev { position: absolute }
+
+            #soja-next a, #soja-prev a {
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: #ccc;
+            }
 
     #soja-bottom {
         padding: 0 10px 10px 0;
