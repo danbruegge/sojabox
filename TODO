@@ -1,7 +1,7 @@
 [0.1]
     * put images in ul list
     * create icons that replace the text in the imageviewer
-    * https://github.com/georgepaterson/jquery-imageviewer/blob/master/script/jquery.imageviewer.js
+    * clean up the code and try to make it smaller
 
 [0.2]
     * think about load content in div
