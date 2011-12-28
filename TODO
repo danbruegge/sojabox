@@ -1,11 +1,6 @@
 [0.1]
-    * create at first all functions to view images and galleries
-    * image-gallary, same a a single image but with the use of rel="" in the
-      <a> tag. That gruoped the images.
-      * use the prev and next image as button for prev and next navigation
-      * put images in ul list
+    * put images in ul list
     * create icons that replace the text in the imageviewer
-    * on bottom of the image, show an the text of the alt tag
     * https://github.com/georgepaterson/jquery-imageviewer/blob/master/script/jquery.imageviewer.js
 
 [0.2]
