@@ -10,14 +10,14 @@
 
 ---
 ## USEAGE
-  * customize and bind css file
-  * bind jquery and the sojabox.js
-  * create a new sojabox object on an elemnt what contains images to show
-    * <script type="text/javascript">$('#page p').sojabox();</script>
-  * a link wrapped around the an image
-  * use class "sojabox"  in <a> for all images that will show in the view
-  * use rel="..." in <a> to create view groups
-    * ... = whatever your group name is
+    * customize and bind css file
+    * bind jquery and the sojabox.js
+    * create a new sojabox object on an elemnt what contains images to show
+        * &lt;script type="text/javascript">$('#page p').sojabox();&lt;/script>
+    * a link wrapped around the an image
+    * use class "sojabox"  in <a> for all images that will show in the view
+    * use rel="..." in <a> to create view groups
+        * ... = whatever your group name is
 
 ---
 ## TODO
