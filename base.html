@@ -26,15 +26,15 @@
                 <a href="img/test_image4.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
             <h2>Usage:</h2>
-            <p id="code">
-                &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;sojabox_dev.css&quot; /&gt;
-                <br />
-                &lt;script type=&quot;text/javascript&quot; src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js&quot;&gt;&lt;/script&gt;
-                <br />
-                &lt;script type=&quot;text/javascript&quot; src=&quot;sojabox.js&quot;&gt;&lt;/script&gt;
-                <br />
-                &lt;script type=&quot;text/javascript&quot;&gt;$('#page p').sojabox();&lt;/script&gt;
-            </p>
+            <pre id="code">
+* customize and bind css file
+* bind jquery and the sojabox.js
+* create a new sojabox object on an elemnt what contains images to show
+  * &lt;script type="text/javascript">$('#page p').sojabox();&lt;/script>
+* a link wrapped around the an image
+* use class "sojabox"  in <a> for all images that will show in the view
+* use rel="..." in <a> to create view groups
+  * ... = whatever your group name is</pre>
         </div>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
