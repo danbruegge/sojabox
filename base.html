@@ -3,39 +3,42 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="sojabox.css" />
+        <style>
+            body { background-color: #999 }
+            #page a img { border: 2px solid #333 }
+            #code {
+                padding: 10px;
+                border: 2px solid #333;
+                background-color: #ccc
+            }
+        </style>
         <title>sojabox - jquery imageviewer</title>
         <meta name="author" content="Daniel Brüggemann" />
     </head>
     <body>
         <div id="page">
+            <h1>sojabox - jquery imageviewer</h1>
+            <h2>Example:</h2>
             <p>
                 <a href="img/test_image1.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
                 <a href="img/test_image2.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image2.jpg" alt="show test image 2" /></a>
                 <a href="img/test_image3.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image3.jpg" alt="show test image 3" /></a>
                 <a href="img/test_image4.jpg" class="sojabox" rel="soja_group"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
-        </div>
-
-        <div id="sojabox">
-            <div id="soja-head">
-                <div>
-                    <a href="#" id="soja-original">ORIGINAL</a>
-                    <a href="#" id="soja-close">CLOSE</a>
-                </div>
-            </div>
-            <div id="soja-body">
-                <div id="soja-wait"><img src="img/wait.gif" alt="wait" /></div>
-                <div id="soja-image"></div>
-                <div id="soja-prev"><a href="#">&lt;</a></div>
-                <div id="soja-next"><a href="#">&gt;</a></div>
-            </div>
-            <div id="soja-bottom">
-                <a href="http://haengebruegge.de" id="soja-copyright">haengebruegge.de</a>
-            </div>
+            <h2>Usage:</h2>
+            <p id="code">
+                &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;sojabox_dev.css&quot; /&gt;
+                <br />
+                &lt;script type=&quot;text/javascript&quot; src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+                <br />
+                &lt;script type=&quot;text/javascript&quot; src=&quot;sojabox.js&quot;&gt;&lt;/script&gt;
+                <br />
+                &lt;script type=&quot;text/javascript&quot;&gt;$('#page p').sojabox();&lt;/script&gt;
+            </p>
         </div>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script type="text/javascript" src="sojabox.js"></script>
-        <script type="text/javascript">$('#page').sojabox();</script>
+        <script type="text/javascript">$('#page p').sojabox();</script>
     </body>
 </html>

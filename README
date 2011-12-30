@@ -17,3 +17,16 @@
     * use class "sojabox"  in <a> for all images that will show in the view
     * use rel="..." in <a> to create view groups
       * ... = whatever your group name is
+
+//=============================================================================
+
+[0.2]
+    * think about load content in div
+    * for content, use jquery load?
+    * print function
+[0.3]
+    * zoom function...
+
+
+NOTE:
+    * checkout computerbase and computerbase for a good imageviewer
