@@ -1,13 +1,12 @@
-
 ## INFO
-title             :sojabox
-description       :jQuery Imageviewer
-author            :Daniel Brüggemann
-license           :WTFPL2
-date              :20111225
-version           :0.1
-notes             :
-jquery_version    :1.7.1
+> title             :sojabox
+> description       :jQuery Imageviewer
+> author            :Daniel Brüggemann
+> license           :WTFPL2
+> date              :20111225
+> version           :0.1
+> notes             :
+> jquery_version    :1.7.1
 
 ---
 ## USEAGE
@@ -22,9 +21,8 @@ jquery_version    :1.7.1
 
 ---
 ## TODO
-
-[0.2]
+  * [0.2]
     * should sojabox show content, like a external website?!
     * print function
-[0.3]
+  * [0.3]
     * zoom function...
