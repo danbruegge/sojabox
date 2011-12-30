@@ -22,8 +22,8 @@
 ---
 ## TODO
 
-[0.2]
-    * should sojabox show content, like a external website?!
-    * print function
-[0.3]
-    * zoom function...
+    [0.2]
+        * should sojabox show content, like a external website?!
+        * print function
+    [0.3]
+        * zoom function...
