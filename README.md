@@ -22,6 +22,12 @@
 ---
 ## TODO
 
+    [0.1.1]
+        * clean up the code, make the dev version more readable
+        * set commits...
+        * add some "fake" effects...
+            * set the position of the empty image container, resize the hidden
+              image and set the new position. Do the same by resizing an image.
     [0.2]
         * should sojabox show content, like a external website?!
         * print function

@@ -1,26 +1,100 @@
-#sojabox{display:none;position:absolute;top:0;left:0;background-color:#000}
-#soja-head{overflow:auto;position:relative;background-color:#111;border-bottom:2px solid #333;z-index:2100}
-#soja-head div{overflow:auto;height:38px}
-#soja-head div p{margin:10px 20% 0;text-align:center;color:#ccc;font-size:14px;font-weight:bold}
-#soja-head div a{position:absolute;top:3px;width:32px;height:32px;background-image:url('icons.png')}
-#soja-show-hide{left:15px;background-position:0 -128px}
-#soja-original{left:47px;background-position:0 -64px}
-#soja-close{right:15px;background-position:0 -96px}
-#soja-show-hide:hover{background-position:-32px -128px}
-#soja-original:hover{background-position:-32px -64px}
-#soja-close:hover{background-position:-32px -96px}
-#soja-original span,#soja-close span{display:none}
-.hide{width:95px;border-right:2px solid #333}
-#soja-wait, #soja-image{overflow:auto;display:none;position:absolute;z-index:2050;color:#ccc}
-#soja-wait{display:block}
-#soja-wait img,#soja-image img{display:block;border:5px solid #333}
-#soja-next,#soja-prev{position:absolute;z-index:2075}
-#soja-next a,#soja-prev a{display:block;width:32px;height:32px;background-image:url('icons.png')}
-#soja-next a{background-position:0 0}
-#soja-next a:hover{background-position:-32px 0}
-#soja-prev a{background-position:0 -32px}
-#soja-prev a:hover{background-position:-32px -32px}
-#soja-next a span,#soja-prev a span{display:none}
-#soja-bottom{padding:0 10px 10px 0;position:absolute;bottom:0;right:0;z-index:2075}
-#soja-bottom a{font-size:9px;color:#333;text-decoration:none}
-#soja-bottom a:hover{color:#999}
+#sojabox {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000
+}
+    #soja-head {
+        overflow: auto;
+        position:fixed;
+        width:100%;
+        background-color: #111;
+        border-bottom: 2px solid #333;
+        z-index: 2100
+    }
+
+        #soja-head div {
+            overflow: auto;
+            height: 38px;
+        }
+
+            #soja-head div p {
+                margin: 10px 20% 0;
+                text-align: center;
+                color: #ccc;
+                font-size: 14px;
+                font-weight: bold
+            }
+
+            #soja-head div a {
+                position: absolute;
+                top: 3px;
+                width: 32px; height: 32px;
+                background-image: url('icons.png');
+            }
+
+            #soja-show-hide { left: 15px; background-position: 0 -128px }
+
+            #soja-original { left: 47px; background-position: 0 -64px }
+
+            #soja-close { right: 15px; background-position: 0 -96px }
+
+                #soja-show-hide:hover { background-position: -32px -128px }
+                #soja-original:hover { background-position: -32px -64px }
+                #soja-close:hover {background-position: -32px -96px }
+
+                    #soja-original span, #soja-close span { display: none }
+
+        #soja-wait,
+        #soja-image {
+            overflow: auto;
+            display: none;
+            position: absolute;
+            z-index: 2050;
+            color: #ccc
+        }
+
+        #soja-wait { display:block }
+
+            #soja-wait img, #soja-image img {
+                display: block;
+                border: 5px solid #333
+            }
+
+        #soja-next, #soja-prev { position:absolute; z-index: 2075 }
+
+            #soja-next a, #soja-prev a {
+                display: block;
+                width: 32px; height: 32px;
+                background-image: url('icons.png');
+            }
+
+            #soja-next a { background-position: 0 0 }
+            #soja-next a:hover { background-position: -32px 0 }
+            #soja-prev a { background-position: 0 -32px }
+            #soja-prev a:hover { background-position: -32px -32px }
+
+                #soja-next a span, #soja-prev a span { display:none; }
+
+    #soja-bottom {
+        padding: 0 10px 10px 0;
+        position: absolute;
+        bottom: 0; right: 0;
+        z-index: 2075
+    }
+
+        #soja-bottom a {
+            font-size: 9px;
+            color: #333;
+            text-decoration: none
+        }
+
+        #soja-bottom a:hover { color: #999 }
+
+.body { overflow: hidden }
+
+.hide {
+    width: 95px !important;
+    border-right: 2px solid #333
+}
