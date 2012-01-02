@@ -25,9 +25,9 @@
             wait_gif = 'img/wait.gif';
 
             $('<div id="sojabox"><div id="soja-head"><div><a href="#"id="soja-show-hide"title="hide head"></a><a href="#"id="soja-original"title="original"></a><p id="soja-alt"></p><a href="#"id="soja-close"title="close"></a></div></div><div id="soja-body"><div id="soja-wait"><img src="'+wait_gif+'"alt="wait"/></div><div id="soja-image"></div><div id="soja-prev"title="prev"><a href="#"></a></div><div id="soja-next"title="next"><a href="#"></a></div></div><div id="soja-bottom"><a href="http://haengebruegge.de"id="soja-copyright">haengebruegge.de</a></div></div>').appendTo('body');
-            sojabox = $('#sojabox');
-            soja_head = sojabox.children('#soja-head');
-            soja_body = sojabox.children('#soja-body');
+            soja = $('#sojabox');
+            soja_head = soja.children('#soja-head');
+            soja_body = soja.children('#soja-body');
             soja_image = soja_body.children('#soja-image');
             soja_wait = soja_body.children('#soja-wait');
             soja_original = soja_head.find('#soja-original');
@@ -96,7 +96,7 @@
 
             methods.set_view_position(soja_wait);
             methods.set_box_size();
-            sojabox.css('display', 'block');
+            soja.css('display', 'block');
 
             soja_image.children('img').each(function() {
                 $(this).load(function() {
@@ -108,7 +108,7 @@
             });
         },
         close: function() {
-            sojabox.css('display', 'none');
+            soja.css('display', 'none');
             soja_image.css('display', 'none');
             soja_wait.css('display', 'block');
             soja_image.children('img').detach();
@@ -170,7 +170,7 @@
             };
         },
         set_box_size: function() {
-            sojabox.css({'width':W.width(),'height':D.height()});
+            soja.css({'width':W.width(),'height':D.height()});
         },
         set_view_position: function(view) {
             view.css({
