@@ -16,7 +16,7 @@
 
         #soja-head div {
             overflow: auto;
-            height: 38px;
+            height: 38px
         }
 
             #soja-head div p {
@@ -31,7 +31,7 @@
                 position: absolute;
                 top: 3px;
                 width: 32px; height: 32px;
-                background-image: url('icons.png');
+                background-image: url('icons.png')
             }
 
             #soja-show-hide { left: 15px; background-position: 0 -128px }
@@ -61,6 +61,11 @@
                 display: block;
                 border: 5px solid #333
             }
+
+    #soja-body {
+        width: 100%;
+        height: 100%
+    }
 
         #soja-next, #soja-prev { position:absolute; z-index: 2075 }
 
@@ -95,6 +100,6 @@
 .body { overflow: hidden }
 
 .hide {
-    width: 95px !important;
+    width: 62px !important;
     border-right: 2px solid #333
 }

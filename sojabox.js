@@ -27,13 +27,12 @@
             D = $(document);
             body = $('body');
 
-            $('<div id="sojabox"><div id="soja-head"><div><a href="#"id="soja-show-hide"title="hide head"></a><a href="#"id="soja-original"title="original"></a><p id="soja-alt"></p><a href="#"id="soja-close"title="close"></a></div></div><div id="soja-body"><div id="soja-wait"><img src="'+S['wait_img']+'"alt="wait"/></div><div id="soja-image"></div><div id="soja-prev"title="prev"><a href="#"></a></div><div id="soja-next"title="next"><a href="#"></a></div></div><div id="soja-bottom"><a href="http://haengebruegge.de"id="soja-copyright">haengebruegge.de</a></div></div>').appendTo('body');
+            $('<div id="sojabox"><div id="soja-head"><div><a href="#" id="soja-show-hide" title="show hide head"></a><p id="soja-alt"></p></div></div><div id="soja-body"><div id="soja-wait"><img src="'+S['wait_img']+'" alt="wait"/></div><div id="soja-image"></div><div id="soja-prev" title="prev"><a href="#"></a></div><div id="soja-next"title="next"><a href="#"></a></div></div><div id="soja-bottom"><a href="http://haengebruegge.de" id="soja-copyright">haengebruegge.de</a></div></div>').appendTo('body');
             soja = $('#sojabox');
             soja_head = soja.children('#soja-head');
             soja_body = soja.children('#soja-body');
             soja_image = soja_body.children('#soja-image');
             soja_wait = soja_body.children('#soja-wait');
-            soja_original = soja_head.find('#soja-original');
             soja_alt = soja_head.find('#soja-alt');
 
             img_size = new Array(0, 0);
@@ -54,7 +53,7 @@
                         e.preventDefault();
                         M.open($(this)); return false;
                 });
-                $('#soja-close').unbind('click').bind(
+                soja_body.unbind('click').bind(
                     'click', function() {
                         M.close(); return false;
                 });
@@ -67,11 +66,10 @@
         open: function(target) {
             body.addClass('body');
 
-            if(target.attr('rel')) {
+            soja_group = $obj.find('a');
+            if(soja_group.length >= 2) {
                 soja_prev = soja_body.children('#soja-prev');
                 soja_next = soja_body.children('#soja-next');
-                soja_group_name = target.attr('rel');
-                soja_group = $obj.find('a[rel*="'+soja_group_name+'"]');
 
                 for(i=0;i<soja_group.length;i++) {
                     if(target[0]==soja_group[i]) { active=i };
@@ -104,11 +102,13 @@
             M.set_box_size();
             soja.css('display', 'block');
 
+            soja_wait.css('visibility', 'visible');
             soja_image.children('img').each(function() {
                 $(this).load(function() {
                     soja_wait.css('display', 'none');
                     M.set_image_size($(this));
                     M.set_view_position(soja_image);
+                    soja_wait.css('visibility', 'hidden');
                     soja_image.css('visibility', 'visible');
                 });
             });
@@ -127,12 +127,10 @@
             var alt = soja_head.find('#soja-alt');
             var show_hide = soja_head.find('#soja-show-hide');
             if(soja_head.hasClass('hide')) {
-                soja_original.css('display', 'block');
                 alt.css('display', 'block');
                 show_hide.attr('title', 'hide head');
                 soja_head.removeClass('hide')
             } else {
-                soja_original.css('display', 'none');
                 alt.css('display', 'none');
                 show_hide.attr('title', 'show head');
                 soja_head.addClass('hide');
@@ -140,12 +138,17 @@
         },
         add_image: function(href, alt) {
             soja_image.children('img').detach();
-            soja_image.append('<img src="'+href+'" />');
-            soja_original.attr('href', href);
+            soja_image.append('<img src="'+href+'" title="show original" />');
             soja_alt.text(alt);
+
+            soja_image.children('img').unbind('click').bind(
+                'click', function() {
+                window.location.href = href;
+            });
         },
         change: function(step) {
             soja_image.css('visibility', 'hidden');
+            soja_wait.css('visibility', 'visible');
             M.add_image(
                 $(soja_group[step]).attr('href'),
                 $(soja_group[step]).children('img').attr('alt')
@@ -153,6 +156,7 @@
             soja_image.children('img').load(function() {
                 M.set_image_size(soja_image.children('img'));
                 M.set_view_position(soja_image);
+                soja_wait.css('visibility', 'hidden');
                 soja_image.css('visibility', 'visible');
             });
 
