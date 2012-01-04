@@ -1,4 +1,4 @@
-// see README
+    // see README
 (function($) {
     $.fn.sojabox = function(method) {
         $obj = this;
@@ -16,15 +16,18 @@
 
     var methods = {
         init: function(options) {
+            S = $.extend({
+                extensions: new Array('.jpg','.png','.gif'),
+                image_size: new Array(0.85, 1.5),
+                nav_button: new Array(32, 32),
+                wait_img: 'img/wait.gif'
+            }, options);
+
             W = $(window);
             D = $(document);
             body = $('body');
-            extensions = new Array('.jpg','.png','.gif');
-            image_size = new Array(0.85, 1.5);
-            nav_button = new Array(32, 32);
-            wait_gif = 'img/wait.gif';
 
-            $('<div id="sojabox"><div id="soja-head"><div><a href="#"id="soja-show-hide"title="hide head"></a><a href="#"id="soja-original"title="original"></a><p id="soja-alt"></p><a href="#"id="soja-close"title="close"></a></div></div><div id="soja-body"><div id="soja-wait"><img src="'+wait_gif+'"alt="wait"/></div><div id="soja-image"></div><div id="soja-prev"title="prev"><a href="#"></a></div><div id="soja-next"title="next"><a href="#"></a></div></div><div id="soja-bottom"><a href="http://haengebruegge.de"id="soja-copyright">haengebruegge.de</a></div></div>').appendTo('body');
+            $('<div id="sojabox"><div id="soja-head"><div><a href="#"id="soja-show-hide"title="hide head"></a><a href="#"id="soja-original"title="original"></a><p id="soja-alt"></p><a href="#"id="soja-close"title="close"></a></div></div><div id="soja-body"><div id="soja-wait"><img src="'+S['wait_img']+'"alt="wait"/></div><div id="soja-image"></div><div id="soja-prev"title="prev"><a href="#"></a></div><div id="soja-next"title="next"><a href="#"></a></div></div><div id="soja-bottom"><a href="http://haengebruegge.de"id="soja-copyright">haengebruegge.de</a></div></div>').appendTo('body');
             soja = $('#sojabox');
             soja_head = soja.children('#soja-head');
             soja_body = soja.children('#soja-body');
@@ -86,9 +89,9 @@
                 });
             };
 
-            for(key in extensions) {
+            for(key in S['extensions']) {
                 href = target.attr('href');
-                if(href.toLowerCase().indexOf(extensions[key]) >= 0) {
+                if(href.toLowerCase().indexOf(S['extensions'][key]) >= 0) {
                     methods.add_image(href,target.children('img').attr('alt'));
                     break;
                 };
@@ -181,21 +184,21 @@
         set_nav_position: function() {
             if(soja_group) {
                 var half_win_height = W.height()/2,
-                    top_pos = (half_win_height-nav_button[1])+W.scrollTop();
+                    top_pos = (half_win_height-S['nav_button'][1])+W.scrollTop();
 
                 soja_prev.css('top',top_pos);
                 soja_next.css({
                     'top': top_pos,
-                    'left': (W.width()-nav_button[0])+W.scrollLeft()
+                    'left': (W.width()-S['nav_button'][0])+W.scrollLeft()
                 });
             };
         },
         set_image_size: function(img) {
             win_height = W.height();
             if(img.height()>=win_height) {
-                img.css('height', win_height*image_size[0]);
+                img.css('height', win_height*S['image_size'][0]);
             } else if(img.width()>=W.width()) {
-                img.css('width', win_height*image_size[1]);
+                img.css('width', win_height*S['image_size'][1]);
             }
         }
     };

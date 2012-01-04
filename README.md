@@ -22,7 +22,7 @@
 ---
 ## TODO
 
-    [0.1.1]
+    [0.2]
         * clean up the code, make the dev version more readable
         * set commits...
         * add some "fake" effects...
@@ -34,8 +34,9 @@
           in one group.
         * check IE compatibility
         * if window is resized, resize the image too.
-    [0.2]
+        * let sojabox configured by options...
+    [0.3]
         * should sojabox show content, like a external website?!
         * print function
-    [0.3]
+    [0.4]
         * zoom function...
