@@ -25,15 +25,11 @@
     [0.2]
         * clean up the code, make the dev version more readable
         * set commits...
-        * add some "fake" effects...
-            * set the position of the empty image container, resize the hidden
-              image and set the new position. Do the same by resizing an image.
         * using rel= in a tag is bad in html5 without the right attributes...i
           think defining a better solution is to work with the object
           initialisation...$('#some_id').sojabox(); <- all images children are
           in one group.
         * check IE compatibility
-        * if window is resized, resize the image too.
     [0.3]
         * should sojabox show content, like a external website?!
         * print function

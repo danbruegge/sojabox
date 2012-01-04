@@ -49,7 +49,7 @@
         #soja-wait,
         #soja-image {
             overflow: auto;
-            display: none;
+            visibility: hidden;
             position: absolute;
             z-index: 2050;
             color: #ccc

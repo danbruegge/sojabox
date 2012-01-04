@@ -106,10 +106,10 @@
 
             soja_image.children('img').each(function() {
                 $(this).load(function() {
-                    soja_image.css('display', 'block');
                     soja_wait.css('display', 'none');
                     M.set_image_size($(this));
                     M.set_view_position(soja_image);
+                    soja_image.css('visibility', 'visible');
                 });
             });
         },
@@ -117,8 +117,8 @@
             img_size[0] = 0;
             img_size[1] = 0;
             soja.css('display', 'none');
-            soja_image.css('display', 'none');
-            soja_wait.css('display', 'block');
+            soja_image.css('visibility', 'hidden');
+            soja_wait.css('visibility', 'hidden');
             soja_image.children('img').detach();
             soja_alt.text('');
             body.removeClass('body');
@@ -145,6 +145,7 @@
             soja_alt.text(alt);
         },
         change: function(step) {
+            soja_image.css('visibility', 'hidden');
             M.add_image(
                 $(soja_group[step]).attr('href'),
                 $(soja_group[step]).children('img').attr('alt')
@@ -152,6 +153,7 @@
             soja_image.children('img').load(function() {
                 M.set_image_size(soja_image.children('img'));
                 M.set_view_position(soja_image);
+                soja_image.css('visibility', 'visible');
             });
 
             img_size[0] = 0;
@@ -203,7 +205,6 @@
         },
         set_image_size: function(img) {
             if(img_size[0] == 0 && img_size[1] == 0) {
-                console.log('resize');
                 img_size[0] = img.width();
                 img_size[1] = img.height();
             };
