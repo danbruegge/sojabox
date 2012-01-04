@@ -1,20 +1,20 @@
     // see README
 (function($) {
-    $.fn.sojabox = function(method) {
+    $.fn.sojabox = function(m) {
         $obj = this;
-        if(methods[method]) {
-            return methods[method].apply(
+        if(M[m]) {
+            return M[m].apply(
                 this,
                 Array.prototype.slice.call(arguments,1)
             );
-        } else if (typeof method === 'object' || !method) {
-            return methods.init.apply(this, arguments);
+        } else if (typeof m === 'object' || !m) {
+            return M.init.apply(this, arguments);
         } else {
-            $.error('Method '+method+' does not exist on jQuery.sojabox');
+            $.error('Method '+m+' does not exist on jQuery.sojabox');
         }
     };
 
-    var methods = {
+    var M = {
         init: function(options) {
             S = $.extend({
                 extensions: new Array('.jpg','.png','.gif'),
@@ -36,28 +36,31 @@
             soja_original = soja_head.find('#soja-original');
             soja_alt = soja_head.find('#soja-alt');
 
+            img_size = new Array(0, 0);
+
             soja_group_name = null;
             soja_group = null;
 
             return this.each(function(){
                 W.resize(function() {
-                    methods.set_view_position(soja_wait);
-                    methods.set_view_position(soja_image);
-                    methods.set_box_size();
-                    methods.set_nav_position();
+                    M.set_image_size(soja_image.children('img'));
+                    M.set_view_position(soja_wait);
+                    M.set_view_position(soja_image);
+                    M.set_box_size();
+                    M.set_nav_position();
                 });
                 $obj.find('a.sojabox').unbind('click').bind(
                     'click', function(e) {
                         e.preventDefault();
-                        methods.open($(this)); return false;
+                        M.open($(this)); return false;
                 });
                 $('#soja-close').unbind('click').bind(
                     'click', function() {
-                        methods.close(); return false;
+                        M.close(); return false;
                 });
                 $('#soja-show-hide').unbind('click').bind(
                     'click', function() {
-                        methods.show_hide(); return false;
+                        M.show_hide(); return false;
                 });
             });
         },
@@ -76,41 +79,43 @@
                 next=active+1;
                 prev=active-1;
                 //~ soja_group[prev], soja_group[active], soja_group[next]
-                methods.set_nav_position();
+                M.set_nav_position();
 
                 soja_prev.children('a').unbind('click').bind(
                     'click', function() {
-                    methods.prev(prev); return false;
+                    M.prev(prev); return false;
                 });
 
                 soja_next.children('a').unbind('click').bind(
                     'click', function() {
-                    methods.next(next); return false;
+                    M.next(next); return false;
                 });
             };
 
             for(key in S['extensions']) {
                 href = target.attr('href');
                 if(href.toLowerCase().indexOf(S['extensions'][key]) >= 0) {
-                    methods.add_image(href,target.children('img').attr('alt'));
+                    M.add_image(href,target.children('img').attr('alt'));
                     break;
                 };
             };
 
-            methods.set_view_position(soja_wait);
-            methods.set_box_size();
+            M.set_view_position(soja_wait);
+            M.set_box_size();
             soja.css('display', 'block');
 
             soja_image.children('img').each(function() {
                 $(this).load(function() {
                     soja_image.css('display', 'block');
                     soja_wait.css('display', 'none');
-                    methods.set_image_size($(this));
-                    methods.set_view_position(soja_image);
+                    M.set_image_size($(this));
+                    M.set_view_position(soja_image);
                 });
             });
         },
         close: function() {
+            img_size[0] = 0;
+            img_size[1] = 0;
             soja.css('display', 'none');
             soja_image.css('display', 'none');
             soja_wait.css('display', 'block');
@@ -140,23 +145,26 @@
             soja_alt.text(alt);
         },
         change: function(step) {
-            methods.add_image(
+            M.add_image(
                 $(soja_group[step]).attr('href'),
                 $(soja_group[step]).children('img').attr('alt')
             );
             soja_image.children('img').load(function() {
-                methods.set_image_size(soja_image.children('img'));
-                methods.set_view_position(soja_image);
+                M.set_image_size(soja_image.children('img'));
+                M.set_view_position(soja_image);
             });
+
+            img_size[0] = 0;
+            img_size[1] = 0;
         },
         prev: function(step) {
             if(prev >= 0) {
-                methods.change(step);active-=1;prev-=1;next-=1;
+                M.change(step);active-=1;prev-=1;next-=1;
             } else {
                 active = soja_group.length-1;
                 prev = soja_group.length-2;
                 next = soja_group.length;
-                methods.change(active);
+                M.change(active);
             };
         },
         next: function(step) {
@@ -164,12 +172,12 @@
                 active+=1;
                 prev+=1;
                 next+=1;
-                methods.change(step);
+                M.change(step);
             } else {
                 active=0;
                 prev=-1;
                 next=1;
-                methods.change(active);
+                M.change(active);
             };
         },
         set_box_size: function() {
@@ -194,10 +202,16 @@
             };
         },
         set_image_size: function(img) {
+            if(img_size[0] == 0 && img_size[1] == 0) {
+                console.log('resize');
+                img_size[0] = img.width();
+                img_size[1] = img.height();
+            };
+
             win_height = W.height();
-            if(img.height()>=win_height) {
+            if(img_size[1]>=win_height) {
                 img.css('height', win_height*S['image_size'][0]);
-            } else if(img.width()>=W.width()) {
+            } else if(img_size[0]>=W.width()) {
                 img.css('width', win_height*S['image_size'][1]);
             }
         }

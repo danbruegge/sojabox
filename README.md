@@ -34,7 +34,6 @@
           in one group.
         * check IE compatibility
         * if window is resized, resize the image too.
-        * let sojabox configured by options...
     [0.3]
         * should sojabox show content, like a external website?!
         * print function
