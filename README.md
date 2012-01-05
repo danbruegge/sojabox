@@ -4,7 +4,7 @@
     author            :Daniel 'haenebruegge' Brüggemann
     license           :WTFPL2
     date              :20111225
-    version           :0.2
+    version           :0.2.1
     notes             :
     jquery version    :1.7.1
 
@@ -30,7 +30,7 @@
 ---
 ## TODO
 
-    [0.2.1]
+    [0.2.2]
         * clean up the code, make the dev version more readable
         * set commits...
         * check IE compatibility
