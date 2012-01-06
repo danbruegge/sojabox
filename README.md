@@ -34,6 +34,7 @@
         * clean up the code, make the dev version more readable
         * set commits...
         * check IE compatibility
+            * on first click, image will not resize..
     [0.3]
         * should sojabox show content, like a external website?!
         * print function

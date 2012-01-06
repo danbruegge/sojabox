@@ -5,7 +5,7 @@
     left: 0;
     background-color: #000
 }
-    #soja-head {
+    #sj-head {
         overflow: auto;
         position:fixed;
         width:100%;
@@ -14,12 +14,12 @@
         z-index: 2100
     }
 
-        #soja-head div {
+        #sj-head div {
             overflow: auto;
             height: 38px
         }
 
-            #soja-head div p {
+            #sj-head div p {
                 margin: 10px 20% 0;
                 text-align: center;
                 color: #ccc;
@@ -27,27 +27,27 @@
                 font-weight: bold
             }
 
-            #soja-head div a {
+            #sj-head div a {
                 position: absolute;
                 top: 3px;
                 width: 32px; height: 32px;
                 background-image: url('icons.png')
             }
 
-            #soja-show-hide { left: 15px; background-position: 0 -128px }
+            #sj-show-hide { left: 15px; background-position: 0 -128px }
 
-            #soja-original { left: 47px; background-position: 0 -64px }
+            #sj-original { left: 47px; background-position: 0 -64px }
 
-            #soja-close { right: 15px; background-position: 0 -96px }
+            #sj-close { right: 15px; background-position: 0 -96px }
 
-                #soja-show-hide:hover { background-position: -32px -128px }
-                #soja-original:hover { background-position: -32px -64px }
-                #soja-close:hover {background-position: -32px -96px }
+                #sj-show-hide:hover { background-position: -32px -128px }
+                #sj-original:hover { background-position: -32px -64px }
+                #sj-close:hover {background-position: -32px -96px }
 
-                    #soja-original span, #soja-close span { display: none }
+                    #sj-original span, #sj-close span { display: none }
 
-        #soja-wait,
-        #soja-image {
+        #sj-wait,
+        #sj-image {
             overflow: auto;
             visibility: hidden;
             position: absolute;
@@ -55,47 +55,47 @@
             color: #ccc
         }
 
-        #soja-wait { display:block }
+        #sj-wait { display:block }
 
-            #soja-wait img, #soja-image img {
+            #sj-wait img, #sj-image img {
                 display: block;
                 border: 5px solid #333
             }
 
-    #soja-body {
+    #sj-body {
         width: 100%;
         height: 100%
     }
 
-        #soja-next, #soja-prev { position:absolute; z-index: 2075 }
+        #sj-next, #sj-prev { position:absolute; z-index: 2075 }
 
-            #soja-next a, #soja-prev a {
+            #sj-next a, #sj-prev a {
                 display: block;
                 width: 32px; height: 32px;
                 background-image: url('icons.png');
             }
 
-            #soja-next a { background-position: 0 0 }
-            #soja-next a:hover { background-position: -32px 0 }
-            #soja-prev a { background-position: 0 -32px }
-            #soja-prev a:hover { background-position: -32px -32px }
+            #sj-next a { background-position: 0 0 }
+            #sj-next a:hover { background-position: -32px 0 }
+            #sj-prev a { background-position: 0 -32px }
+            #sj-prev a:hover { background-position: -32px -32px }
 
-                #soja-next a span, #soja-prev a span { display:none; }
+                #sj-next a span, #sj-prev a span { display:none; }
 
-    #soja-bottom {
+    #sj-bottom {
         padding: 0 10px 10px 0;
         position: absolute;
         bottom: 0; right: 0;
         z-index: 2075
     }
 
-        #soja-bottom a {
+        #sj-bottom a {
             font-size: 9px;
             color: #333;
             text-decoration: none
         }
 
-        #soja-bottom a:hover { color: #999 }
+        #sj-bottom a:hover { color: #999 }
 
 .body { overflow: hidden }
 

@@ -17,9 +17,9 @@
     var M = {
         init: function(options) {
             S = $.extend({
-                extensions: new Array('.jpg','.png','.gif'),
-                image_size: new Array(0.85, 1.5),
-                nav_button: new Array(32, 32),
+                extensions: ['.jpg','.png','.gif'],
+                image_size: [0.85, 1.5],
+                nav_button: [32, 32],
                 wait_img: 'img/wait.gif'
             }, options);
 
@@ -27,37 +27,37 @@
             D = $(document);
             body = $('body');
 
-            $('<div id="sojabox"><div id="soja-head"><div><a href="#"id="soja-show-hide"title="hide head"></a><a href="#"id="soja-original"title="original"></a><p id="soja-alt"></p><a href="#"id="soja-close"title="close"></a></div></div><div id="soja-body"><div id="soja-wait"><img src="'+S['wait_img']+'"alt="wait"/></div><div id="soja-image"></div><div id="soja-prev"title="prev"><a href="#"></a></div><div id="soja-next"title="next"><a href="#"></a></div></div><div id="soja-bottom"><a href="http://haengebruegge.de"id="soja-copyright">haengebruegge.de</a></div></div>').appendTo('body');
-            soja = $('#sojabox');
-            soja_head = soja.children('#soja-head');
-            soja_body = soja.children('#soja-body');
-            soja_image = soja_body.children('#soja-image');
-            soja_wait = soja_body.children('#soja-wait');
-            soja_original = soja_head.find('#soja-original');
-            soja_alt = soja_head.find('#soja-alt');
+            $('<div id="sojabox"><div id="sj-head"><div><a href="#"id="sj-show-hide"title="hide head"></a><a href="#"id="sj-original"title="original"></a><p id="sj-alt"></p><a href="#"id="sj-close"title="close"></a></div></div><div id="sj-body"><div id="sj-wait"><img src="'+S['wait_img']+'"alt="wait"/></div><div id="sj-image"></div><div id="sj-prev"title="prev"><a href="#"></a></div><div id="sj-next"title="next"><a href="#"></a></div></div><div id="sj-bottom"><a href="http://haengebruegge.de"id="sj-copyright">haengebruegge.de</a></div></div>').appendTo('body');
+            sj = $('#sojabox');
+            sj_head = sj.children('#sj-head');
+            sj_body = sj.children('#sj-body');
+            sj_image = sj_body.children('#sj-image');
+            sj_wait = sj_body.children('#sj-wait');
+            sj_original = sj_head.find('#sj-original');
+            sj_alt = sj_head.find('#sj-alt');
 
-            img_size = new Array(0, 0);
+            img_size = [0, 0];
 
-            soja_group_name = null;
-            soja_group = $obj.find('a.sojabox');
+            sj_group_name = null;
+            sj_group = $obj.find('a.sojabox');
 
             return this.each(function(){
                 W.resize(function() {
-                    M.set_image_size(soja_image.children('img'));
-                    M.set_view_position(soja_wait);
-                    M.set_view_position(soja_image);
+                    M.set_image_size(sj_image.children('img'));
+                    M.set_view_position(sj_wait);
+                    M.set_view_position(sj_image);
                     M.set_box_size();
                     M.set_nav_position();
                 });
-                soja_group.unbind('click').bind(
+                sj_group.unbind('click').bind(
                     'click', function(e) {
                         e.preventDefault();
                         M.open($(this)); return false;
                 });
-                $('#soja-close').unbind('click').bind('click', function() {
+                $('#sj-close').unbind('click').bind('click', function() {
                     M.close(); return false;
                 });
-                $('#soja-show-hide').unbind('click').bind('click', function() {
+                $('#sj-show-hide').unbind('click').bind('click', function() {
                         M.show_hide(); return false;
                 });
             });
@@ -65,24 +65,24 @@
         open: function(target) {
             body.addClass('body');
 
-            if(soja_group.length >= 2) {
-                soja_prev = soja_body.children('#soja-prev');
-                soja_next = soja_body.children('#soja-next');
+            if(sj_group.length >= 2) {
+                sj_prev = sj_body.children('#sj-prev');
+                sj_next = sj_body.children('#sj-next');
 
-                for(i=0;i<soja_group.length;i++) {
-                    if(target[0]==soja_group[i]) { active=i };
+                for(i=0;i<sj_group.length;i++) {
+                    if(target[0]==sj_group[i]) { active=i };
                 };
                 next=active+1;
                 prev=active-1;
-                //~ soja_group[prev], soja_group[active], soja_group[next]
+                //~ sj_group[prev], sj_group[active], sj_group[next]
                 M.set_nav_position();
 
-                soja_prev.children('a').unbind('click').bind(
+                sj_prev.children('a').unbind('click').bind(
                     'click', function() {
                     M.prev(prev); return false;
                 });
 
-                soja_next.children('a').unbind('click').bind(
+                sj_next.children('a').unbind('click').bind(
                     'click', function() {
                     M.next(next); return false;
                 });
@@ -96,63 +96,63 @@
                 };
             };
 
-            M.set_view_position(soja_wait);
+            M.set_view_position(sj_wait);
             M.set_box_size();
-            soja.css('display', 'block');
+            sj.css('display', 'block');
 
-            soja_wait.css('visibility', 'visible');
-            soja_image.children('img').each(function() {
+            sj_wait.css('visibility', 'visible');
+            sj_image.children('img').each(function() {
                 $(this).load(function() {
                     M.set_image_size($(this));
-                    M.set_view_position(soja_image);
-                    soja_wait.css('visibility', 'hidden');
-                    soja_image.css('visibility', 'visible');
+                    M.set_view_position(sj_image);
+                    sj_wait.css('visibility', 'hidden');
+                    sj_image.css('visibility', 'visible');
                 });
             });
         },
         close: function() {
             img_size[0] = 0;
             img_size[1] = 0;
-            soja.css('display', 'none');
-            soja_image.css('visibility', 'hidden');
-            soja_wait.css('visibility', 'hidden');
-            soja_image.children('img').detach();
-            soja_alt.text('');
+            sj.css('display', 'none');
+            sj_image.css('visibility', 'hidden');
+            sj_wait.css('visibility', 'hidden');
+            sj_image.children('img').detach();
+            sj_alt.text('');
             body.removeClass('body');
         },
         show_hide: function() {
-            var alt = soja_head.find('#soja-alt');
-            var show_hide = soja_head.find('#soja-show-hide');
-            if(soja_head.hasClass('hide')) {
-                soja_original.css('display', 'block');
+            var alt = sj_head.find('#sj-alt');
+            var show_hide = sj_head.find('#sj-show-hide');
+            if(sj_head.hasClass('hide')) {
+                sj_original.css('display', 'block');
                 alt.css('display', 'block');
                 show_hide.attr('title', 'hide head');
-                soja_head.removeClass('hide')
+                sj_head.removeClass('hide')
             } else {
-                soja_original.css('display', 'none');
+                sj_original.css('display', 'none');
                 alt.css('display', 'none');
                 show_hide.attr('title', 'show head');
-                soja_head.addClass('hide');
+                sj_head.addClass('hide');
             };
         },
         add_image: function(href, alt) {
-            soja_image.children('img').detach();
-            soja_original.attr('href', href);
-            soja_image.append('<img src="'+href+'"/>');
-            soja_alt.text(alt);
+            sj_image.children('img').detach();
+            sj_original.attr('href', href);
+            sj_image.append('<img src="'+href+'"/>');
+            sj_alt.text(alt);
         },
         change: function(step) {
-            soja_image.css('visibility', 'hidden');
-            soja_wait.css('visibility', 'visible');
+            sj_image.css('visibility', 'hidden');
+            sj_wait.css('visibility', 'visible');
             M.add_image(
-                $(soja_group[step]).attr('href'),
-                $(soja_group[step]).children('img').attr('alt')
+                $(sj_group[step]).attr('href'),
+                $(sj_group[step]).children('img').attr('alt')
             );
-            soja_image.children('img').load(function() {
-                M.set_image_size(soja_image.children('img'));
-                M.set_view_position(soja_image);
-                soja_wait.css('visibility', 'hidden');
-                soja_image.css('visibility', 'visible');
+            sj_image.children('img').load(function() {
+                M.set_image_size(sj_image.children('img'));
+                M.set_view_position(sj_image);
+                sj_wait.css('visibility', 'hidden');
+                sj_image.css('visibility', 'visible');
             });
 
             img_size[0] = 0;
@@ -162,14 +162,14 @@
             if(prev >= 0) {
                 M.change(step);active-=1;prev-=1;next-=1;
             } else {
-                active = soja_group.length-1;
-                prev = soja_group.length-2;
-                next = soja_group.length;
+                active = sj_group.length-1;
+                prev = sj_group.length-2;
+                next = sj_group.length;
                 M.change(active);
             };
         },
         next: function(step) {
-            if(next <= soja_group.length-1) {
+            if(next <= sj_group.length-1) {
                 active+=1;
                 prev+=1;
                 next+=1;
@@ -182,7 +182,7 @@
             };
         },
         set_box_size: function() {
-            soja.css({'width':W.width(),'height':D.height()});
+            sj.css({'width':W.width(),'height':D.height()});
         },
         set_view_position: function(view) {
             view.css({
@@ -191,12 +191,12 @@
             });
         },
         set_nav_position: function() {
-            if(soja_group) {
+            if(sj_group) {
                 var half_win_height = W.height()/2,
                     top_pos = (half_win_height-S['nav_button'][1])+W.scrollTop();
 
-                soja_prev.css('top',top_pos);
-                soja_next.css({
+                sj_prev.css('top',top_pos);
+                sj_next.css({
                     'top': top_pos,
                     'left': (W.width()-S['nav_button'][0])+W.scrollLeft()
                 });
