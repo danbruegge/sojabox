@@ -20,7 +20,7 @@
 
 ---
 ## OPTIONS
-    * extensions - define a array of strings. Example: new Array('.jpg','.png','.gif')
+    * fileext - define a array of strings. Example: new Array('.jpg','.png','.gif')
     * image_size - define a array with width and height of floats. Example: new Array(0.85, 1.5),
     * nav_button - define a array with width and height of Integer, in 'px'. Example: new Array(32, 32),
     * wait_img - path to a wait image, default: 'img/wait.gif'
@@ -31,7 +31,6 @@
 ## TODO
 
     [0.2.2]
-        * clean up the code, make the dev version more readable
         * set commits...
         * check IE compatibility
             * on first click, image will not resize..
