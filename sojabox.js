@@ -1,19 +1,5 @@
 // see README.md
 (function($) {
-    $.fn.sojabox = function(m) {
-        $obj = this;
-        if(M[m]) {
-            return M[m].apply(
-                this,
-                Array.prototype.slice.call(arguments, 1)
-            );
-        } else if (typeof m === 'object' || !m) {
-            return M.init.apply($obj, arguments);
-        } else {
-            $.error('Method ' + m + ' does not exist on jQuery.sojabox');
-        }
-    };
-
     var M = {
         init: function(options) {
             S = $.extend({
@@ -40,7 +26,7 @@
 
             sj_group = $obj.find('a.sojabox');
 
-            return this.each(function() {
+            return $obj.each(function() {
                 sj_group.unbind('click').bind('click', function(e) {
                     e.preventDefault();
                     M.open($obj);
@@ -66,7 +52,6 @@
             });
         },
         open: function(target) {
-
             M.group(target);
 
             for(key in S['fileext']) {
@@ -109,8 +94,6 @@
                 sj_next = sj_body.children('#sj-next');
 
                 for(i = 0; i < sj_group.length; i++) {
-                    console.log(target[0]);
-                    console.log(sj_group[i]);
                     if(target[0] == sj_group[i]) { active = i };
                 };
 
@@ -233,6 +216,20 @@
                     'left': (W.width() - S['nav_button'][0]) + W.scrollLeft()
                 });
             };
+        }
+    };
+
+    $.fn.sojabox = function(m) {
+        $obj = this;
+        if(M[m]) {
+            return M[m].apply(
+                $obj,
+                Array.prototype.slice.call(arguments, 1)
+            );
+        } else if (typeof m === 'object' || !m) {
+            return M.init.apply($obj, arguments);
+        } else {
+            $.error('Method ' + m + ' does not exist on jQuery.sojabox');
         }
     };
 })( jQuery );
