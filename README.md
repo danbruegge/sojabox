@@ -4,7 +4,7 @@
     author            :Daniel 'haenebruegge' Brüggemann
     license           :WTFPL2
     date              :20111225
-    version           :0.2.1
+    version           :0.3
     notes             :
     jquery version    :1.7.1
 
@@ -30,12 +30,11 @@
 ---
 ## TODO
 
-    [0.2.2]
-        * set commits...
-        * check IE compatibility
-            * on first click, image will not resize..
     [0.3]
+        * set commits...
+        * not possible to run more than one instance of sojabox
+        * write option that says if grouping is required or not
+    [0.4]
         * should sojabox show content, like a external website?!
         * print function
-    [0.4]
         * zoom function...

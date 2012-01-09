@@ -8,7 +8,7 @@
                 Array.prototype.slice.call(arguments, 1)
             );
         } else if (typeof m === 'object' || !m) {
-            return M.init.apply(this, arguments);
+            return M.init.apply($obj, arguments);
         } else {
             $.error('Method ' + m + ' does not exist on jQuery.sojabox');
         }
@@ -38,13 +38,12 @@
 
             img_size = [0, 0];
 
-            sj_group_name = null;
             sj_group = $obj.find('a.sojabox');
 
             return this.each(function() {
                 sj_group.unbind('click').bind('click', function(e) {
                     e.preventDefault();
-                    M.open($(this));
+                    M.open($obj);
                     return false;
                 });
                 $('#sj-close').unbind('click').bind('click', function() {
@@ -67,7 +66,6 @@
             });
         },
         open: function(target) {
-            body.addClass('body');
 
             M.group(target);
 
@@ -81,6 +79,9 @@
 
             M.set_view_position(sj_wait);
             M.set_box_size();
+
+            body.addClass('body');
+
             sj.css('display', 'block');
 
             sj_wait.css('visibility', 'visible');
@@ -108,24 +109,30 @@
                 sj_next = sj_body.children('#sj-next');
 
                 for(i = 0; i < sj_group.length; i++) {
+                    console.log(target[0]);
+                    console.log(sj_group[i]);
                     if(target[0] == sj_group[i]) { active = i };
                 };
-                next = active + 1;
-                prev = active - 1;
-                //~ sj_group[prev], sj_group[active], sj_group[next]
-                M.set_nav_position();
 
-                sj_prev.children('a').unbind('click').bind(
-                    'click', function() {
-                    M.prev(prev);
-                    return false;
-                });
+                if(typeof active !== 'undefined') {
+                    next = active + 1;
+                    prev = active - 1;
 
-                sj_next.children('a').unbind('click').bind(
-                    'click', function() {
-                    M.next(next);
-                    return false;
-                });
+                    //~ sj_group[prev], sj_group[active], sj_group[next]
+                    M.set_nav_position();
+
+                    sj_prev.children('a').unbind('click').bind(
+                        'click', function() {
+                        M.prev(prev);
+                        return false;
+                    });
+
+                    sj_next.children('a').unbind('click').bind(
+                        'click', function() {
+                        M.next(next);
+                        return false;
+                    });
+                };
             };
         },
         show_hide: function() {
@@ -198,10 +205,11 @@
             };
 
             win_height = W.height();
+            win_width = W.width();
             if(img_size[1] >= win_height) {
                 img.css('height', win_height * S['image_size'][0]);
-            } else if(img_size[0] >= W.width()) {
-                img.css('width', win_height*S['image_size'][1]);
+            } else if(img_size[0] >= win_width) {
+                img.css('width', win_width*S['image_size'][1]);
             };
         },
         set_box_size: function() {
