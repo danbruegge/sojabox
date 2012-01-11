@@ -12,8 +12,33 @@
             W = $(window);
             D = $(document);
             body = $('body');
-
-            $('<div id="sojabox"><div id="sj-head"><div><a href="#"id="sj-show-hide"title="hide head"></a><a href="#"id="sj-original"title="original"></a><p id="sj-alt"></p><a href="#"id="sj-close"title="close"></a></div></div><div id="sj-body"><div id="sj-wait"><img src="'+S['wait_img']+'"alt="wait"/></div><div id="sj-image"></div><div id="sj-prev"title="prev"><a href="#"></a></div><div id="sj-next"title="next"><a href="#"></a></div></div><div id="sj-bottom"><a href="http://haengebruegge.de"id="sj-copyright">haengebruegge.de</a></div></div>').appendTo('body');
+            $(['<div id="sojabox">',
+                '<div id="sj-head">',
+                    '<div>',
+                        '<a href="#"id="sj-show-hide"title="hide head"></a>',
+                        '<a href="#"id="sj-original"title="original"></a>',
+                        '<p id="sj-alt"></p>',
+                        '<a href="#"id="sj-close"title="close"></a>',
+                    '</div>',
+                '</div>',
+                '<div id="sj-body">',
+                    '<div id="sj-wait">',
+                        '<img src="',
+                            S['wait_img'],
+                        '"alt="wait"/>',
+                    '</div>',
+                    '<div id="sj-image"></div>',
+                    '<div id="sj-prev"title="prev">',
+                        '<a href="#"></a>',
+                    '</div>',
+                    '<div id="sj-next"title="next">',
+                        '<a href="#"></a>',
+                    '</div>',
+                '</div>',
+                '<div id="sj-bottom">',
+                    '<a href="http://haengebruegge.de"id="sj-copyright">haengebruegge.de</a>',
+                '</div>',
+            '</div>'].join('')).appendTo(body);
             sj = $('#sojabox');
             sj_head = sj.children('#sj-head');
             sj_body = sj.children('#sj-body');
@@ -21,23 +46,13 @@
             sj_wait = sj_body.children('#sj-wait');
             sj_original = sj_head.find('#sj-original');
             sj_alt = sj_head.find('#sj-alt');
-
-            img_size = [0, 0];
-
             sj_group = $obj.find('a.sojabox');
+            img_size = [0, 0];
 
             return $obj.each(function() {
                 sj_group.unbind('click').bind('click', function(e) {
                     e.preventDefault();
-                    M.open($obj);
-                    return false;
-                });
-                $('#sj-close').unbind('click').bind('click', function() {
-                    M.close();
-                    return false;
-                });
-                $('#sj-show-hide').unbind('click').bind('click', function() {
-                    M.show_hide();
+                    M.open($(this));
                     return false;
                 });
                 W.resize(function() {
@@ -48,27 +63,26 @@
                         M.set_box_size();
                         M.set_nav_position();
                     };
+                    return true;
                 });
             });
         },
         open: function(target) {
             M.group(target);
 
-            for(key in S['fileext']) {
+            for(var i = 0; i < S['fileext'].length; i++) {
                 href = target.attr('href');
-                if(href.toLowerCase().indexOf(S['fileext'][key]) >= 0) {
+                if(href.toLowerCase().indexOf(S['fileext'][i]) >= 0) {
                     M.add_image(href,target.children('img').attr('alt'));
                     break;
                 };
             };
 
+            body.addClass('body');
             M.set_view_position(sj_wait);
             M.set_box_size();
 
-            body.addClass('body');
-
             sj.css('display', 'block');
-
             sj_wait.css('visibility', 'visible');
             sj_image.children('img').each(function() {
                 $(this).load(function() {
@@ -76,60 +90,52 @@
                     M.set_view_position(sj_image);
                     sj_wait.css('visibility', 'hidden');
                     sj_image.css('visibility', 'visible');
+
+                    $('#sj-close').unbind('click').bind('click', function() {
+                        M.close();
+                        return false;
+                    });
+                    $('#sj-show-hide').unbind('click').bind('click', function() {
+                        M.show_hide();
+                        return false;
+                    });
                 });
             });
-        },
-        close: function() {
-            img_size = [0, 0];
-            sj.css('display', 'none');
-            sj_image.css('visibility', 'hidden');
-            sj_wait.css('visibility', 'hidden');
-            sj_image.children('img').detach();
-            sj_alt.text('');
-            body.removeClass('body');
         },
         group: function(target) {
             if(sj_group.length >= 2) {
                 sj_prev = sj_body.children('#sj-prev');
                 sj_next = sj_body.children('#sj-next');
+                active = $(target[0]).index();
+                prev = active - 1;
+                next = active + 1;
 
-                for(i = 0; i < sj_group.length; i++) {
-                    if(target[0] == sj_group[i]) { active = i };
-                };
+                M.set_nav_position();
 
-                if(typeof active !== 'undefined') {
-                    next = active + 1;
-                    prev = active - 1;
-
-                    //~ sj_group[prev], sj_group[active], sj_group[next]
-                    M.set_nav_position();
-
-                    sj_prev.children('a').unbind('click').bind(
-                        'click', function() {
-                        M.prev(prev);
-                        return false;
-                    });
-
-                    sj_next.children('a').unbind('click').bind(
-                        'click', function() {
-                        M.next(next);
-                        return false;
-                    });
-                };
+                sj_prev.children('a').unbind('click').bind(
+                    'click', function() {
+                    M.prev(prev);
+                    return false;
+                });
+                sj_next.children('a').unbind('click').bind(
+                    'click', function() {
+                    M.next(next);
+                    return false;
+                });
             };
         },
         show_hide: function() {
             var alt = sj_head.find('#sj-alt'),
-                show_hide = sj_head.find('#sj-show-hide');
+                panel = sj_head.find('#sj-show-hide');
             if(sj_head.hasClass('hide')) {
                 sj_original.css('display', 'block');
                 alt.css('display', 'block');
-                show_hide.attr('title', 'hide head');
+                panel.attr('title', 'hide head');
                 sj_head.removeClass('hide')
             } else {
                 sj_original.css('display', 'none');
                 alt.css('display', 'none');
-                show_hide.attr('title', 'show head');
+                panel.attr('title', 'show head');
                 sj_head.addClass('hide');
             };
         },
@@ -216,16 +222,22 @@
                     'left': (W.width() - S['nav_button'][0]) + W.scrollLeft()
                 });
             };
+        },
+        close: function() {
+            img_size = [0, 0];
+            sj.css('display', 'none');
+            sj_image.css('visibility', 'hidden');
+            sj_wait.css('visibility', 'hidden');
+            sj_image.children('img').detach();
+            sj_alt.text('');
+            body.removeClass('body');
         }
     };
 
     $.fn.sojabox = function(m) {
         $obj = this;
         if(M[m]) {
-            return M[m].apply(
-                $obj,
-                Array.prototype.slice.call(arguments, 1)
-            );
+            return M[m].apply($obj,Array.prototype.slice.call(arguments, 1));
         } else if (typeof m === 'object' || !m) {
             return M.init.apply($obj, arguments);
         } else {

@@ -34,6 +34,8 @@
         * set commits...
         * not possible to run more than one instance of sojabox
         * write option that says if grouping is required or not
+        * let the user select the links that will open with sojabox
+            * e.g. $('a[rel^=lightbox]').lightBox();
     [0.4]
         * should sojabox show content, like a external website?!
         * print function
