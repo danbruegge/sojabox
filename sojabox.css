@@ -34,13 +34,13 @@
                 background-image: url('icons.png')
             }
 
-            #sj-show-hide { left: 15px; background-position: 0 -128px }
+            #sj-panel { left: 15px; background-position: 0 -128px }
 
             #sj-original { left: 47px; background-position: 0 -64px }
 
             #sj-close { right: 15px; background-position: 0 -96px }
 
-                #sj-show-hide:hover { background-position: -32px -128px }
+                #sj-panel:hover { background-position: -32px -128px }
                 #sj-original:hover { background-position: -32px -64px }
                 #sj-close:hover {background-position: -32px -96px }
 

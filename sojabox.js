@@ -1,6 +1,11 @@
 // see README.md
 (function($) {
-    var M = {
+    var W = $(window),
+    D = $(document),
+    body = $('body'),
+    S,sj,sj_head,sj_body,sj_image,sj_wait,sj_original,sj_alt,sj_group,
+    img_size = [0, 0],
+    M = {
         init: function(options) {
             S = $.extend({
                 fileext: ['.jpg','.png','.gif'],
@@ -8,14 +13,10 @@
                 nav_button: [32, 32],
                 wait_img: 'img/wait.gif'
             }, options);
-
-            W = $(window);
-            D = $(document);
-            body = $('body');
             $(['<div id="sojabox">',
                 '<div id="sj-head">',
                     '<div>',
-                        '<a href="#"id="sj-show-hide"title="hide head"></a>',
+                        '<a href="#"id="sj-panel"title="hide panel"></a>',
                         '<a href="#"id="sj-original"title="original"></a>',
                         '<p id="sj-alt"></p>',
                         '<a href="#"id="sj-close"title="close"></a>',
@@ -47,7 +48,6 @@
             sj_original = sj_head.find('#sj-original');
             sj_alt = sj_head.find('#sj-alt');
             sj_group = $obj.find('a.sojabox');
-            img_size = [0, 0];
 
             return $obj.each(function() {
                 sj_group.unbind('click').bind('click', function(e) {
@@ -58,10 +58,10 @@
                 W.resize(function() {
                     if(sj.css('display') == 'block') {
                         M.resize(sj_image.children('img'));
-                        M.set_view_position(sj_wait);
-                        M.set_view_position(sj_image);
-                        M.set_box_size();
-                        M.set_nav_position();
+                        M.reposition(sj_wait);
+                        M.reposition(sj_image);
+                        M.resize_box();
+                        M.navigation();
                     };
                     return true;
                 });
@@ -79,24 +79,49 @@
             };
 
             body.addClass('body');
-            M.set_view_position(sj_wait);
-            M.set_box_size();
+            M.reposition(sj_wait);
+            M.resize_box();
 
             sj.css('display', 'block');
             sj_wait.css('visibility', 'visible');
             sj_image.children('img').each(function() {
                 $(this).load(function() {
                     M.resize($(this));
-                    M.set_view_position(sj_image);
+                    M.reposition(sj_image);
                     sj_wait.css('visibility', 'hidden');
                     sj_image.css('visibility', 'visible');
 
                     $('#sj-close').unbind('click').bind('click', function() {
-                        M.close();
+                        //~ ---------------------------------------------------
+                        //~ close the sojabox and try to destroy all
+                        //~ ---------------------------------------------------
+                        img_size = [0, 0];
+                        sj.css('display', 'none');
+                        sj_image.css('visibility', 'hidden');
+                        sj_wait.css('visibility', 'hidden');
+                        sj_image.children('img').detach();
+                        sj_alt.text('');
+                        body.removeClass('body');
                         return false;
                     });
-                    $('#sj-show-hide').unbind('click').bind('click', function() {
-                        M.show_hide();
+                    $('#sj-panel').unbind('click').bind('click', function() {
+                        //~ ---------------------------------------------------
+                        //~ hide panel when it is displayed or show if it is
+                        //~ hidden
+                        //~ ---------------------------------------------------
+                        var alt = sj_head.find('#sj-alt'),
+                            panel = sj_head.find('#sj-show-hide');
+                        if(sj_head.hasClass('hide')) {
+                            sj_original.css('display', 'block');
+                            alt.css('display', 'block');
+                            panel.attr('title', 'hide panel');
+                            sj_head.removeClass('hide')
+                        } else {
+                            sj_original.css('display', 'none');
+                            alt.css('display', 'none');
+                            panel.attr('title', 'show panel');
+                            sj_head.addClass('hide');
+                        };
                         return false;
                     });
                 });
@@ -110,7 +135,7 @@
                 prev = active - 1;
                 next = active + 1;
 
-                M.set_nav_position();
+                M.navigation();
 
                 sj_prev.children('a').unbind('click').bind(
                     'click', function() {
@@ -122,21 +147,6 @@
                     M.next(next);
                     return false;
                 });
-            };
-        },
-        show_hide: function() {
-            var alt = sj_head.find('#sj-alt'),
-                panel = sj_head.find('#sj-show-hide');
-            if(sj_head.hasClass('hide')) {
-                sj_original.css('display', 'block');
-                alt.css('display', 'block');
-                panel.attr('title', 'hide head');
-                sj_head.removeClass('hide')
-            } else {
-                sj_original.css('display', 'none');
-                alt.css('display', 'none');
-                panel.attr('title', 'show head');
-                sj_head.addClass('hide');
             };
         },
         add_image: function(href, alt) {
@@ -154,7 +164,7 @@
             );
             sj_image.children('img').load(function() {
                 M.resize(sj_image.children('img'));
-                M.set_view_position(sj_image);
+                M.reposition(sj_image);
                 sj_wait.css('visibility', 'hidden');
                 sj_image.css('visibility', 'visible');
             });
@@ -201,20 +211,20 @@
                 img.css('width', win_width*S['image_size'][1]);
             };
         },
-        set_box_size: function() {
+        resize_box: function() {
             sj.css({ 'width': W.width(), 'height': D.height() });
         },
-        set_view_position: function(view) {
+        reposition: function(view) {
             view.css({
                 'left': (W.width() / 2) - (view.width() / 2) + W.scrollLeft(),
                 'top': (W.height() / 2) - (view.height() / 2) + W.scrollTop()
             });
         },
-        set_nav_position: function() {
+        navigation: function() {
             if(sj_group) {
                 var half_win_height = W.height() / 2,
                     top_pos = (half_win_height - S['nav_button'][1])
-                              + W.scrollTop();
+                               + W.scrollTop();
 
                 sj_prev.css('top', top_pos);
                 sj_next.css({
@@ -222,15 +232,6 @@
                     'left': (W.width() - S['nav_button'][0]) + W.scrollLeft()
                 });
             };
-        },
-        close: function() {
-            img_size = [0, 0];
-            sj.css('display', 'none');
-            sj_image.css('visibility', 'hidden');
-            sj_wait.css('visibility', 'hidden');
-            sj_image.children('img').detach();
-            sj_alt.text('');
-            body.removeClass('body');
         }
     };
 
