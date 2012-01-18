@@ -6,7 +6,7 @@
         D = $(document),
         body = $('body'),
         S,sj,sj_head,sj_body,sj_image,sj_wait,sj_original,sj_alt,
-        sj_group = $obj.find('a.sojabox'),
+        images = $obj.find('a'),
         img_size = [0, 0],
         S = $.extend({
             fileext: ['.jpg','.png','.gif'],
@@ -15,34 +15,34 @@
             wait_img: 'img/wait.gif'
         }, s);
 
+        /** sojabox TEMPLATE
+            <div id="sojabox">
+                <div id="soja-head">
+                    <div>
+                        <a href="#"id="soja-show-hide"title="hide head"></a>
+                        <a href="#"id="soja-original"title="original"></a>
+                        <p id="soja-alt"></p>
+                        <a href="#"id="soja-close"title="close"></a>
+                    </div>
+                </div>
+                <div id="soja-body">
+                    <div id="soja-wait">
+                        <img src="'+S['wait_img']+'"alt="wait" />
+                    </div>
+                    <div id="soja-image"><a href="#"title="show original"></a></div>
+                    <div id="soja-prev"title="prev"><a href="#"></a></div>
+                    <div id="soja-next"title="next"><a href="#"></a></div>
+                </div>
+                <div id="soja-bottom">
+                    <a href="http://haengebruegge.de"id="soja-copyright">haengebruegge.de</a>
+                </div>
+            </div>
+        */
         function _open(target) {
-            $(['<div id="sojabox">',
-                '<div id="sj-head">',
-                    '<div>',
-                        '<a href="#"id="sj-panel"title="hide panel"></a>',
-                        '<a href="#"id="sj-original"title="original"></a>',
-                        '<p id="sj-alt"></p>',
-                        '<a href="#"id="sj-close"title="close"></a>',
-                    '</div>',
-                '</div>',
-                '<div id="sj-body">',
-                    '<div id="sj-wait">',
-                        '<img src="',
-                            S['wait_img'],
-                        '"alt="wait"/>',
-                    '</div>',
-                    '<div id="sj-image"></div>',
-                    '<div id="sj-prev"title="prev">',
-                        '<a href="#"></a>',
-                    '</div>',
-                    '<div id="sj-next"title="next">',
-                        '<a href="#"></a>',
-                    '</div>',
-                '</div>',
-                '<div id="sj-bottom">',
-                    '<a href="http://haengebruegge.de"id="sj-copyright">haengebruegge.de</a>',
-                '</div>',
-            '</div>'].join('')).appendTo(body);
+            //~ init ui START =================================================
+            $('<div id="sojabox"><div id="sj-head"><div><a href="#"id="sj-panel"title="hide panel"></a><a href="#"id="sj-original"title="original"></a><p id="sj-alt"></p><a href="#"id="sj-close"title="close"></a></div></div><div id="sj-body"><div id="sj-wait"><img src="'+S['wait_img']+'"alt="wait"/></div><div id="sj-image"></div><div id="sj-prev"title="prev"><a href="#"></a></div><div id="sj-next"title="next"><a href="#"></a></div></div><div id="sj-bottom"><a href="http://haengebruegge.de"id="sj-copyright">haengebruegge.de</a></div></div>').appendTo(body);
+            body.addClass('body');
+
             sj = $('#sojabox');
             sj_head = sj.children('#sj-head');
             sj_body = sj.children('#sj-body');
@@ -51,7 +51,35 @@
             sj_original = sj_head.find('#sj-original');
             sj_alt = sj_head.find('#sj-alt');
 
-            _group(target);
+            _reposition(sj_wait);
+            _resize_box();
+
+            sj.css('display', 'block');
+            sj_wait.css('visibility', 'visible');
+            //~ init ui END ===================================================
+
+            //~ grouping START ================================================
+            if(images.length >= 2) {
+                sj_prev = sj_body.children('#sj-prev');
+                sj_next = sj_body.children('#sj-next');
+                active = $(target[0]).index();
+                prev = active - 1;
+                next = active + 1;
+
+                _navigation();
+
+                sj_prev.children('a').unbind('click').bind(
+                    'click', function() {
+                    _prev(prev);
+                    return false;
+                });
+                sj_next.children('a').unbind('click').bind(
+                    'click', function() {
+                    _next(next);
+                    return false;
+                });
+            };
+            //~ grouping END ==================================================
 
             for(var i = 0; i < S['fileext'].length; i++) {
                 href = target.attr('href');
@@ -61,12 +89,6 @@
                 };
             };
 
-            body.addClass('body');
-            _reposition(sj_wait);
-            _resize_box();
-
-            sj.css('display', 'block');
-            sj_wait.css('visibility', 'visible');
             sj_image.children('img').each(function() {
                 $(this).load(function() {
                     _resize($(this));
@@ -111,29 +133,6 @@
             });
         };
 
-        function _group(target) {
-            if(sj_group.length >= 2) {
-                sj_prev = sj_body.children('#sj-prev');
-                sj_next = sj_body.children('#sj-next');
-                active = $(target[0]).index();
-                prev = active - 1;
-                next = active + 1;
-
-                _navigation();
-
-                sj_prev.children('a').unbind('click').bind(
-                    'click', function() {
-                    _prev(prev);
-                    return false;
-                });
-                sj_next.children('a').unbind('click').bind(
-                    'click', function() {
-                    _next(next);
-                    return false;
-                });
-            };
-        };
-
         function _add_image(href, alt) {
             sj_image.children('img').detach();
             sj_original.attr('href', href);
@@ -145,8 +144,8 @@
             sj_image.css('visibility', 'hidden');
             sj_wait.css('visibility', 'visible');
             _add_image(
-                $(sj_group[step]).attr('href'),
-                $(sj_group[step]).children('img').attr('alt')
+                $(images[step]).attr('href'),
+                $(images[step]).children('img').attr('alt')
             );
             sj_image.children('img').load(function() {
                 _resize(sj_image.children('img'));
@@ -165,15 +164,15 @@
                 prev -= 1;
                 next -= 1;
             } else {
-                active = sj_group.length -1;
-                prev = sj_group.length -2;
-                next = sj_group.length;
+                active = images.length -1;
+                prev = images.length -2;
+                next = images.length;
                 _change(active);
             };
         };
 
         function _next(step) {
-            if(next <= sj_group.length - 1) {
+            if(next <= images.length - 1) {
                 active += 1;
                 prev += 1;
                 next += 1;
@@ -213,7 +212,7 @@
         };
 
         function _navigation() {
-            if(sj_group) {
+            if(images) {
                 var half_win_height = W.height() / 2,
                     top_pos = (half_win_height - S['nav_button'][1])
                                + W.scrollTop();
@@ -227,7 +226,7 @@
         };
 
         return $obj.each(function() {
-            sj_group.unbind('click').bind('click', function(e) {
+            images.unbind('click').bind('click', function(e) {
                 e.preventDefault();
                 _open($(this));
                 return false;

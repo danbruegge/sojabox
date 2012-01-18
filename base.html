@@ -30,6 +30,9 @@
                 <a href="img/test_image1.jpg" class="sojabox"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
                 <a href="img/test_image4.jpg" class="sojabox"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
+            <p id="group3">
+                <a href="img/test_image1.jpg" class="sojabox"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
+            </p>
             <hr />
             <h2 id="info">INFO</h2>
             <pre><code>title             :sojabox
@@ -70,10 +73,11 @@ All shown options are the defaults of sojabox.</code></pre>
         </div>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="sojabox_new.js"></script>
+        <script type="text/javascript" src="sojabox.js"></script>
         <script type="text/javascript">
-            sb1 = $('#group1').sojabox();
-            sb2 = $('#group2').sojabox();
+            $('#group1').sojabox();
+            $('#group2').sojabox();
+            $('#group3').sojabox();
         </script>
     </body>
 </html>
