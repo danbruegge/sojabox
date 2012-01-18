@@ -15,7 +15,6 @@
     * create a new sojabox object on an elemnt what contains images to show
         * <script type="text/javascript">$('#page p').sojabox();</script>
     * a link wrapped around the an image
-    * use class "sojabox"  in <a> for all images that will show in the view
     * all images in e.g: '#page p' are in the same group
 
 ---
@@ -32,10 +31,8 @@
 
     [0.3]
         * set commits...
-        * not possible to run more than one instance of sojabox
-        * write option that says if grouping is required or not
-        * let the user select the links that will open with sojabox
-            * e.g. $('a[rel^=lightbox]').lightBox();
+        * single image don't work correct
+
     [0.4]
         * should sojabox show content, like a external website?!
         * print function

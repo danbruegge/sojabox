@@ -21,17 +21,17 @@
             <h1>sojabox - jquery imageviewer</h1>
             <h2>EXAMPLE:</h2>
             <p id="group1">
-                <a href="img/test_image1.jpg" class="sojabox"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
-                <a href="img/test_image2.jpg" class="sojabox"><img src="img/thumbs/test_image2.jpg" alt="show test image 2" /></a>
-                <a href="img/test_image3.jpg" class="sojabox"><img src="img/thumbs/test_image3.jpg" alt="show test image 3" /></a>
-                <a href="img/test_image4.jpg" class="sojabox"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
+                <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
+                <a href="img/test_image2.jpg"><img src="img/thumbs/test_image2.jpg" alt="show test image 2" /></a>
+                <a href="img/test_image3.jpg"><img src="img/thumbs/test_image3.jpg" alt="show test image 3" /></a>
+                <a href="img/test_image4.jpg"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
             <p id="group2">
-                <a href="img/test_image1.jpg" class="sojabox"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
-                <a href="img/test_image4.jpg" class="sojabox"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
+                <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
+                <a href="img/test_image4.jpg"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
             <p id="group3">
-                <a href="img/test_image1.jpg" class="sojabox"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
+                <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
             </p>
             <hr />
             <h2 id="info">INFO</h2>
@@ -50,7 +50,6 @@ jquery version    :1.7.1</code></pre>
 * create a new sojabox object on an elemnt what contains images to show
     * &lt;script type=&quot;text/javascript&quot;&gt;$('#page p').sojabox();&lt;/script&gt;
 * a link wrapped around the an image
-* use class &quot;sojabox&quot;  in &lt;a&gt; for all images that will show in the view
 * all images in e.g: '#page p' are in the same group</code></pre>
             <hr />
             <h2 id="options">OPTIONS</h2>
@@ -64,8 +63,7 @@ All shown options are the defaults of sojabox.</code></pre>
             <h2 id="todo">TODO</h2>
             <pre><code>[0.3]
     * set commits...
-    * not possible to run more than one instance of sojabox
-    * write option that says if grouping is required or not
+    * single image don't work correct
 [0.4]
     * should sojabox show content, like a external website?!
     * print function
