@@ -1,18 +1,21 @@
 // see README.md
 (function($) {
-    var W = $(window),
-    D = $(document),
-    body = $('body'),
-    S,sj,sj_head,sj_body,sj_image,sj_wait,sj_original,sj_alt,sj_group,
-    img_size = [0, 0],
-    M = {
-        init: function(options) {
-            S = $.extend({
-                fileext: ['.jpg','.png','.gif'],
-                image_size: [0.85, 1.5],
-                nav_button: [32, 32],
-                wait_img: 'img/wait.gif'
-            }, options);
+    $.fn.sojabox = function(s) {
+        var $obj = this,
+        W = $(window),
+        D = $(document),
+        body = $('body'),
+        S,sj,sj_head,sj_body,sj_image,sj_wait,sj_original,sj_alt,
+        sj_group = $obj.find('a.sojabox'),
+        img_size = [0, 0],
+        S = $.extend({
+            fileext: ['.jpg','.png','.gif'],
+            image_size: [0.85, 1.5],
+            nav_button: [32, 32],
+            wait_img: 'img/wait.gif'
+        }, s);
+
+        function _open(target) {
             $(['<div id="sojabox">',
                 '<div id="sj-head">',
                     '<div>',
@@ -47,47 +50,27 @@
             sj_wait = sj_body.children('#sj-wait');
             sj_original = sj_head.find('#sj-original');
             sj_alt = sj_head.find('#sj-alt');
-            sj_group = $obj.find('a.sojabox');
 
-            return $obj.each(function() {
-                sj_group.unbind('click').bind('click', function(e) {
-                    e.preventDefault();
-                    M.open($(this));
-                    return false;
-                });
-                W.resize(function() {
-                    if(sj.css('display') == 'block') {
-                        M.resize(sj_image.children('img'));
-                        M.reposition(sj_wait);
-                        M.reposition(sj_image);
-                        M.resize_box();
-                        M.navigation();
-                    };
-                    return true;
-                });
-            });
-        },
-        open: function(target) {
-            M.group(target);
+            _group(target);
 
             for(var i = 0; i < S['fileext'].length; i++) {
                 href = target.attr('href');
                 if(href.toLowerCase().indexOf(S['fileext'][i]) >= 0) {
-                    M.add_image(href,target.children('img').attr('alt'));
+                    _add_image(href,target.children('img').attr('alt'));
                     break;
                 };
             };
 
             body.addClass('body');
-            M.reposition(sj_wait);
-            M.resize_box();
+            _reposition(sj_wait);
+            _resize_box();
 
             sj.css('display', 'block');
             sj_wait.css('visibility', 'visible');
             sj_image.children('img').each(function() {
                 $(this).load(function() {
-                    M.resize($(this));
-                    M.reposition(sj_image);
+                    _resize($(this));
+                    _reposition(sj_image);
                     sj_wait.css('visibility', 'hidden');
                     sj_image.css('visibility', 'visible');
 
@@ -126,8 +109,9 @@
                     });
                 });
             });
-        },
-        group: function(target) {
+        };
+
+        function _group(target) {
             if(sj_group.length >= 2) {
                 sj_prev = sj_body.children('#sj-prev');
                 sj_next = sj_body.children('#sj-next');
@@ -135,45 +119,48 @@
                 prev = active - 1;
                 next = active + 1;
 
-                M.navigation();
+                _navigation();
 
                 sj_prev.children('a').unbind('click').bind(
                     'click', function() {
-                    M.prev(prev);
+                    _prev(prev);
                     return false;
                 });
                 sj_next.children('a').unbind('click').bind(
                     'click', function() {
-                    M.next(next);
+                    _next(next);
                     return false;
                 });
             };
-        },
-        add_image: function(href, alt) {
+        };
+
+        function _add_image(href, alt) {
             sj_image.children('img').detach();
             sj_original.attr('href', href);
             sj_image.append('<img src="'+href+'"/>');
             sj_alt.text(alt);
-        },
-        change: function(step) {
+        };
+
+        function _change(step) {
             sj_image.css('visibility', 'hidden');
             sj_wait.css('visibility', 'visible');
-            M.add_image(
+            _add_image(
                 $(sj_group[step]).attr('href'),
                 $(sj_group[step]).children('img').attr('alt')
             );
             sj_image.children('img').load(function() {
-                M.resize(sj_image.children('img'));
-                M.reposition(sj_image);
+                _resize(sj_image.children('img'));
+                _reposition(sj_image);
                 sj_wait.css('visibility', 'hidden');
                 sj_image.css('visibility', 'visible');
             });
 
             img_size = [0, 0];
-        },
-        prev: function(step) {
+        };
+
+        function _prev(step) {
             if(prev >= 0) {
-                M.change(step);
+                _change(step);
                 active -= 1;
                 prev -= 1;
                 next -= 1;
@@ -181,23 +168,25 @@
                 active = sj_group.length -1;
                 prev = sj_group.length -2;
                 next = sj_group.length;
-                M.change(active);
+                _change(active);
             };
-        },
-        next: function(step) {
+        };
+
+        function _next(step) {
             if(next <= sj_group.length - 1) {
                 active += 1;
                 prev += 1;
                 next += 1;
-                M.change(step);
+                _change(step);
             } else {
                 active = 0;
                 prev =- 1;
                 next = 1;
-                M.change(active);
+                _change(active);
             };
-        },
-        resize: function(img) {
+        };
+
+        function _resize(img) {
             if(img_size[0] == 0 && img_size[1] == 0) {
                 img_size[0] = img.width();
                 img_size[1] = img.height();
@@ -210,17 +199,20 @@
             } else if(img_size[0] >= win_width) {
                 img.css('width', win_width*S['image_size'][1]);
             };
-        },
-        resize_box: function() {
+        };
+
+        function _resize_box() {
             sj.css({ 'width': W.width(), 'height': D.height() });
-        },
-        reposition: function(view) {
+        };
+
+        function _reposition(view) {
             view.css({
                 'left': (W.width() / 2) - (view.width() / 2) + W.scrollLeft(),
                 'top': (W.height() / 2) - (view.height() / 2) + W.scrollTop()
             });
-        },
-        navigation: function() {
+        };
+
+        function _navigation() {
             if(sj_group) {
                 var half_win_height = W.height() / 2,
                     top_pos = (half_win_height - S['nav_button'][1])
@@ -232,17 +224,24 @@
                     'left': (W.width() - S['nav_button'][0]) + W.scrollLeft()
                 });
             };
-        }
-    };
+        };
 
-    $.fn.sojabox = function(m) {
-        $obj = this;
-        if(M[m]) {
-            return M[m].apply($obj,Array.prototype.slice.call(arguments, 1));
-        } else if (typeof m === 'object' || !m) {
-            return M.init.apply($obj, arguments);
-        } else {
-            $.error('Method ' + m + ' does not exist on jQuery.sojabox');
-        }
+        return $obj.each(function() {
+            sj_group.unbind('click').bind('click', function(e) {
+                e.preventDefault();
+                _open($(this));
+                return false;
+            });
+            W.resize(function() {
+                if(sj.css('display') == 'block') {
+                    _resize(sj_image.children('img'));
+                    _reposition(sj_wait);
+                    _reposition(sj_image);
+                    _resize_box();
+                    _navigation();
+                };
+                return true;
+            });
+        });
     };
 })( jQuery );
