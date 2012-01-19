@@ -107,6 +107,8 @@
                         sj_image.children('img').detach();
                         sj_alt.text('');
                         body.removeClass('body');
+                        sj_prev.css('top', '0');
+                        sj_next.css('top', '0');
                         return false;
                     });
                     $('#sj-panel').unbind('click').bind('click', function() {
