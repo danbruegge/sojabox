@@ -1,7 +1,7 @@
 ## INFO
     title             :sojabox
     description       :jQuery Imageviewer
-    author            :Daniel 'haenebruegge' Brüggemann
+    author            :Daniel 'haengebruegge' Brüggemann
     license           :WTFPL2
     date              :20111225
     version           :0.3
@@ -31,7 +31,6 @@
 
     [0.3]
         * set commits...
-        * single image don't work correct
 
     [0.4]
         * should sojabox show content, like a external website?!

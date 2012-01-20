@@ -2,80 +2,55 @@
 <html lang="de">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="sojabox.pack.css" />
+        <link rel="stylesheet" type="text/css" href="sojabox.css" />
         <style>
-            body { background-color: #666 }
-            #page { width: 800px; margin: 0 auto }
-            #page a img { border: 2px solid #333 }
-            pre {
-                padding: 10px;
-                border: 2px solid #333;
-                background-color: #ccc
+            body {
+                background-color: #444;
+                font-family: Georgia, "Times New Roman", serif
             }
+            #page {
+                width: 720px;
+                margin: 0 auto;
+                padding: 0 40px;
+                background-color: #ddd;
+                border: 5px solid #131313;
+                border-width: 10px 25px;
+                text-align: center;
+            }
+            #page a img { border: 2px solid #333 }
+            #page a img:hover { border: 2px solid #666 }
         </style>
         <title>sojabox - jquery imageviewer</title>
-        <meta name="author" content="Daniel Brüggemann" />
+        <meta name="author" content="Daniel 'haengebruegge' Brüggemann" />
     </head>
     <body>
         <div id="page">
             <h1>sojabox - jquery imageviewer</h1>
-            <h2>EXAMPLE:</h2>
+            <h2>- EXAMPLE -</h2>
+            <p id="single">
+                <p>Single image</p>
+                <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
+            </p>
             <p id="group1">
+                <p>Group with 2 images</p>
+                <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
+                <a href="img/test_image4.jpg"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
+            </p>
+            <p id="group2">
+                <p>Group with 2 images</p>
                 <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
                 <a href="img/test_image2.jpg"><img src="img/thumbs/test_image2.jpg" alt="show test image 2" /></a>
                 <a href="img/test_image3.jpg"><img src="img/thumbs/test_image3.jpg" alt="show test image 3" /></a>
                 <a href="img/test_image4.jpg"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
             </p>
-            <p id="group2">
-                <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
-                <a href="img/test_image4.jpg"><img src="img/thumbs/test_image4.jpg" alt="show test image 4" /></a>
-            </p>
-            <p id="group3">
-                <a href="img/test_image1.jpg"><img src="img/thumbs/test_image1.jpg" alt="show test image 1" /></a>
-            </p>
-            <hr />
-            <h2 id="info">INFO</h2>
-            <pre><code>title             :sojabox
-description       :jQuery Imageviewer
-author            :Daniel 'haenebruegge' Brüggemann
-license           :WTFPL2
-date              :20111225
-version           :0.3
-notes             :
-jquery version    :1.7.1</code></pre>
-            <hr />
-            <h2 id="useage">USEAGE</h2>
-            <pre><code>* customize and bind css file
-* bind jquery and the sojabox.js
-* create a new sojabox object on an elemnt what contains images to show
-    * &lt;script type=&quot;text/javascript&quot;&gt;$('#page p').sojabox();&lt;/script&gt;
-* a link wrapped around the an image
-* all images in e.g: '#page p' are in the same group</code></pre>
-            <hr />
-            <h2 id="options">OPTIONS</h2>
-            <pre><code>* fileext - define a array of strings. Example: new Array('.jpg','.png','.gif')
-* image_size - define a array with width and height of floats. Example: new Array(0.85, 1.5),
-* nav_button - define a array with width and height of Integer, in 'px'. Example: new Array(32, 32),
-* wait_img - path to a wait image, default: 'img/wait.gif'
-
-All shown options are the defaults of sojabox.</code></pre>
-            <hr />
-            <h2 id="todo">TODO</h2>
-            <pre><code>[0.3]
-    * set commits...
-    * single image don't work correct
-[0.4]
-    * should sojabox show content, like a external website?!
-    * print function
-    * zoom function...</code></pre>
         </div>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script type="text/javascript" src="sojabox.js"></script>
         <script type="text/javascript">
+            $('#single').sojabox();
             $('#group1').sojabox();
             $('#group2').sojabox();
-            $('#group3').sojabox();
         </script>
     </body>
 </html>
