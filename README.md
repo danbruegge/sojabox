@@ -31,6 +31,7 @@
 
     [0.3]
         * set commits...
+        * issue when in group is another html tag beside an anchor tag
 
     [0.4]
         * should sojabox show content, like a external website?!
