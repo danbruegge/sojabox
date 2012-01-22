@@ -6,7 +6,7 @@
         D = $(document),
         body = $('body'),
         S,sj,sj_head,sj_body,sj_image,sj_wait,sj_original,sj_alt,
-        images = $obj.find('a'),
+        images = $obj.children('a'),
         img_size = [0, 0],
         S = $.extend({
             fileext: ['.jpg','.png','.gif'],
@@ -14,6 +14,12 @@
             nav_button: [32, 32],
             wait_img: 'img/wait.gif'
         }, s);
+
+        images.unbind('click').bind('click', function(e) {
+            e.preventDefault();
+            _open($(this));
+            return false;
+        });
 
         /** sojabox TEMPLATE
             <div id="sojabox">
@@ -59,10 +65,10 @@
             //~ init ui END ===================================================
 
             //~ grouping START ================================================
-            if(images.length >= 2) {
+            if(images.length > 1) {
                 sj_prev = sj_body.children('#sj-prev');
                 sj_next = sj_body.children('#sj-next');
-                active = $(target[0]).index();
+                active = $(target[0]).index() - 1;
                 prev = active - 1;
                 next = active + 1;
 
@@ -228,11 +234,6 @@
         };
 
         return $obj.each(function() {
-            images.unbind('click').bind('click', function(e) {
-                e.preventDefault();
-                _open($(this));
-                return false;
-            });
             W.resize(function() {
                 if(sj.css('display') == 'block') {
                     _resize(sj_image.children('img'));
