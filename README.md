@@ -4,7 +4,7 @@
     author            :Daniel 'haengebruegge' Brüggemann
     license           :WTFPL2
     date              :20111225
-    version           :0.3
+    version           :0.next
     notes             :
     jquery version    :1.7.1
 
@@ -29,10 +29,10 @@
 ---
 ## TODO
 
-    [0.3]
+    [0.next]
         * set commits...
 
-    [0.4]
-        * should sojabox show content, like a external website?!
+    [0.after]
+        * able to recharge other elements like a website or a normal p tag
         * print function
-        * zoom function...
+        * zoom function
