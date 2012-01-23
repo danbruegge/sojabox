@@ -117,6 +117,9 @@
                         sj_next.css('top', '0');
                         return false;
                     });
+                    //~ -------------------------------------------------------
+                    //~ - bind click event to panel button
+                    //~ -------------------------------------------------------
                     $('#sj-panel').unbind('click').bind('click', function() {
                         //~ ---------------------------------------------------
                         //~ hide panel when it is displayed or show if it is
